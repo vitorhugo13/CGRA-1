@@ -21,6 +21,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+
         this.diamond = new MyDiamond(this);
         this.triangle = new MyTriangle(this);
         this.parallelogram = new MyParallelogram(this);
@@ -74,10 +75,23 @@ class MyScene extends CGFscene {
                     0.0,             0.0,              0.0,              1.0];
         this.multMatrix(sca);
 
-
+        
         // ---- BEGIN Primitive drawing section
-        if (this.displayDiamond)
+        if (this.displayDiamond) {
+            var rot = [ Math.cos(Math.PI / 4.0), Math.sin(Math.PI / 4.0), 0.0, 0.0,
+                   -Math.sin(Math.PI / 4.0), Math.cos(Math.PI / 4.0), 0.0, 0.0,
+                    0.0,                     0.0,                     1.0, 0.0,
+                    0.0,                     0.0,                     0.0, 1.0];
+            var tra = [  1.0,                                 0.0, 0.0, 0.0,
+                     0.0,                                 1.0, 0.0, 0.0,
+                     0.0,                                 0.0, 1.0, 0.0,
+                    -(Math.sqrt(5) + 0.5), Math.sqrt(5) - 0.5, 0.0, 1.0];
+            this.pushMatrix();
+            this.multMatrix(tra);
+            this.multMatrix(rot);
             this.diamond.display();
+            this.popMatrix();
+        }
         if (this.displayTriangle)
             this.triangle.display();
         if (this.displayParallelogram)
