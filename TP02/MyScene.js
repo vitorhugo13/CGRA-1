@@ -106,8 +106,13 @@ class MyScene extends CGFscene {
             this.triangle.display();
             this.popMatrix();
         }
-        if (this.displayParallelogram)
+        if (this.displayParallelogram) {
+            this.pushMatrix();
+            this.scale(1.0, -1.0, 1.0);
+            this.translate(2.0, 0.0, 0.0);            
             this.parallelogram.display();
+            this.popMatrix();
+        }
         if (this.displayTriangleSmall)
             this.triangleSmall.display();
         if (this.displayTriangleBig) {
