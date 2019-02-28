@@ -31,11 +31,11 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 1;
-        this.displayDiamond = false;
-        this.displayTriangle = false;
-        this.displayParallelogram = false;
-        this.displayTriangleBig = false;
-        this.displayTriangleSmall = false;
+        this.displayDiamond = true;
+        this.displayTriangle = true;
+        this.displayParallelogram = true;
+        this.displayTriangleBig = true;
+        this.displayTriangleSmall = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -75,7 +75,7 @@ class MyScene extends CGFscene {
                     0.0,             0.0,              0.0,              1.0];
         this.multMatrix(sca);
 
-        
+
         // ---- BEGIN Primitive drawing section
         if (this.displayDiamond) {
             var rot = [ Math.cos(Math.PI / 4.0), Math.sin(Math.PI / 4.0), 0.0, 0.0,
