@@ -52,6 +52,12 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    setDiamondAppearance() {
+        this.setAmbient(255, 0.4, 0.8, 1.0);
+        this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+        this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setShininess(10.0);
+    }
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -62,44 +68,54 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
 
         this.setDefaultAppearance();
 
-        var sca = [this.scaleFactor, 0.0,              0.0,              0.0,
-                    0.0,             this.scaleFactor, 0.0,              0.0,
-                    0.0,             0.0,              this.scaleFactor, 0.0,
-                    0.0,             0.0,              0.0,              1.0];
+        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
+            0.0, this.scaleFactor, 0.0, 0.0,
+            0.0, 0.0, this.scaleFactor, 0.0,
+            0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
 
 
         // ---- BEGIN Primitive drawing section
         if (this.displayDiamond) {
-            var rot = [ Math.cos(Math.PI / 4.0), Math.sin(Math.PI / 4.0), 0.0, 0.0,
-                   -Math.sin(Math.PI / 4.0), Math.cos(Math.PI / 4.0), 0.0, 0.0,
-                    0.0,                     0.0,                     1.0, 0.0,
-                    0.0,                     0.0,                     0.0, 1.0];
-            var tra = [  1.0,                                 0.0, 0.0, 0.0,
-                     0.0,                                 1.0, 0.0, 0.0,
-                     0.0,                                 0.0, 1.0, 0.0,
-                    -(Math.sqrt(5) + 0.5), Math.sqrt(5) - 0.5, 0.0, 1.0];
+            var rot = [Math.cos(Math.PI / 4.0), Math.sin(Math.PI / 4.0), 0.0, 0.0,
+            -Math.sin(Math.PI / 4.0), Math.cos(Math.PI / 4.0), 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+                0.0, 0.0, 0.0, 1.0];
+            var tra = [1.0, 0.0, 0.0, 0.0,
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+                -(Math.sqrt(5) + 0.5), Math.sqrt(5) - 1.0, 0.0, 1.0];
             this.pushMatrix();
             this.multMatrix(tra);
             this.multMatrix(rot);
+            this.setDiamondAppearance();
             this.diamond.display();
             this.popMatrix();
+            this.setDefaultAppearance();
         }
-        if (this.displayTriangle)
+        if (this.displayTriangle) {
+            this.pushMatrix();
+            this.translate(-1.0, 1.0, 0.0);
             this.triangle.display();
+            this.popMatrix();
+        }
         if (this.displayParallelogram)
             this.parallelogram.display();
         if (this.displayTriangleSmall)
             this.triangleSmall.display();
-        if (this.displayTriangleBig)
+        if (this.displayTriangleBig) {
+            this.pushMatrix();
+            this.scale(1.0, -1.0, 1.0);
             this.triangleBig.display();
+            this.popMatrix();
+        }
 
         // ---- END Primitive drawing section
     }
