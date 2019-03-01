@@ -126,6 +126,17 @@ class MyScene extends CGFscene {
             this.triangleBig.display();
             this.popMatrix();
         }
+        
+        this.pushMatrix();
+        this.translate(2.0, 0.0, 0.0);
+        this.triangleBig.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-(3.0 + Math.sqrt(2.0)), 2.0, 0.0);
+        this.scale(1.0, -1.0, 1.0);
+        this.triangleSmall.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
