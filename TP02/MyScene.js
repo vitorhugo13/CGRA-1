@@ -91,7 +91,7 @@ class MyScene extends CGFscene {
             var tra = [1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
-                -(Math.sqrt(5) + 0.5), Math.sqrt(5) - 1.0, 0.0, 1.0];
+                -(Math.sqrt(2.0)/2.0 + 2.0), 2.0 - Math.sqrt(2.0)/2.0, 0.0, 1.0];
             this.pushMatrix();
             this.multMatrix(tra);
             this.multMatrix(rot);
@@ -113,8 +113,13 @@ class MyScene extends CGFscene {
             this.parallelogram.display();
             this.popMatrix();
         }
-        if (this.displayTriangleSmall)
+        if (this.displayTriangleSmall) {
+            this.pushMatrix();
+            this.translate(-(3.0 * Math.sqrt(2.0) / 2.0 + 2), 2.0 - Math.sqrt(2.0) / 2.0, 0.0);
+            this.rotate(-3.0 * Math.PI / 4.0, 0.0, 0.0, 1.0);
             this.triangleSmall.display();
+            this.popMatrix();
+        }
         if (this.displayTriangleBig) {
             this.pushMatrix();
             this.scale(1.0, -1.0, 1.0);
