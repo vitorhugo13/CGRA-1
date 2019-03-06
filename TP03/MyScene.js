@@ -38,10 +38,14 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        //this.globalAmbientLight = 0.3;
 
     }
     initLights() {
-        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+        // variable connected to MyInterface
+        this.globalAmbientLight = 0.3;
+
+        this.setGlobalAmbientLight(this.globalAmbientLight,this.globalAmbientLight,this.globalAmbientLight,1.0);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -57,6 +61,10 @@ class MyScene extends CGFscene {
         this.lights[1].setVisible(true);
         this.lights[1].update();
     }
+    updateLights() {
+        this.setGlobalAmbientLight(this.globalAmbientLight,this.globalAmbientLight,this.globalAmbientLight,1.0);
+    }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
