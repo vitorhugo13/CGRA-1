@@ -9,6 +9,15 @@ serialInclude(['../lib/CGF.js',
                 'MyCone.js',
                 'MyPyramid.js',
 
+                'MyUnitCube.js',
+
+                'MyTangram.js',
+                'MyDiamond.js',
+                'MyParallelogram.js',
+                'MyTriangle.js',
+                'MyTriangleBig.js',
+                'MyTriangleSmall.js',
+                
 main=function()
 {
     var app = new CGFapplication(document.body);
