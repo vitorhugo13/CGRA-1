@@ -12,6 +12,15 @@ class MyTangram extends CGFobject {
 		scene.triangleSmall = new MyTriangleSmall(scene);
 		scene.triangleBig = new MyTriangleBig(scene);
 		scene.parallelogram = new MyParallelogram(scene);
+
+		//this.initBuffers();
+	}
+
+	initBuffers() {
+		this.normals = this.scene.diamond.normals;
+
+		//this.primitiveType = this.scene.gl.TRIANGLES;
+		//this.initGLBuffers();
 	}
 
 	display() {
