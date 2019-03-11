@@ -13,14 +13,22 @@ class MyTangram extends CGFobject {
 		scene.triangleBig = new MyTriangleBig(scene);
 		scene.parallelogram = new MyParallelogram(scene);
 
-		//this.initBuffers();
 	}
 
-	initBuffers() {
-		this.normals = this.scene.diamond.normals;
+	enableNormalViz() {
+		this.scene.diamond.enableNormalViz();
+		this.scene.triangle.enableNormalViz();
+		this.scene.triangleSmall.enableNormalViz();
+		this.scene.triangleBig.enableNormalViz();
+		this.scene.parallelogram.enableNormalViz();
+	}
 
-		//this.primitiveType = this.scene.gl.TRIANGLES;
-		//this.initGLBuffers();
+	disableNormalViz() {
+		this.scene.diamond.disableNormalViz();
+		this.scene.triangle.disableNormalViz();
+		this.scene.triangleSmall.disableNormalViz();
+		this.scene.triangleBig.disableNormalViz();
+		this.scene.parallelogram.disableNormalViz();
 	}
 
 	display() {
