@@ -44,9 +44,11 @@ class MyScene extends CGFscene {
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.scaleFactor = 5;
-        this.selectedTexture = -1;        
+        this.selectedTexture = -1;
         this.wrapS = 0;
         this.wrapT = 0;
+
+        this.displayQuad = false;
 
         this.textures = [this.texture1, this.texture2, this.texture3];
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
@@ -56,7 +58,8 @@ class MyScene extends CGFscene {
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
 
-      }
+
+    }
 
     initLights() {
         this.lights[0].setPosition(5, 2, 5, 1);
@@ -92,7 +95,7 @@ class MyScene extends CGFscene {
     }
 
     display() {
-  
+
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -113,15 +116,17 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.quadMaterial.apply();
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
-        
+
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
+        if (this.displayQuad) {
+            this.quadMaterial.apply();
+            this.quad.display();
+        }
 
         // ---- END Primitive drawing section
     }
