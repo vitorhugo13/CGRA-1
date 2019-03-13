@@ -13,6 +13,7 @@ class MyTangram extends CGFobject {
 		scene.triangleBig = new MyTriangleBig(scene);
 		scene.parallelogram = new MyParallelogram(scene);
 
+		this.initMaterials();
 	}
 
 	enableNormalViz() {
@@ -32,6 +33,8 @@ class MyTangram extends CGFobject {
 	}
 
 	display() {
+
+		this.scene.tangramMT.apply();
 
 		/* display DIAMOND */
 		var rot = [Math.cos(Math.PI / 4.0), Math.sin(Math.PI / 4.0), 0.0, 0.0,
@@ -90,5 +93,16 @@ class MyTangram extends CGFobject {
 		this.scene.popMatrix();
 	}
 
+	initMaterials() {
+
+		/* TANGRAM MATERIAL */
+		this.scene.tangramMT = new CGFappearance(this.scene);
+        this.scene.tangramMT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.tangramMT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.tangramMT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.tangramMT.setShininess(10.0);
+        this.scene.tangramMT.loadTexture('images/tangram.png');
+		this.scene.tangramMT.setTextureWrap('REPEAT', 'REPEAT');
+	}
 }
 
