@@ -34,6 +34,18 @@ class MyParallelogram extends CGFobject {
             2, 3, 0,
             0, 1, 2
 		];
+
+		this.texCoords = [
+			0.25, 0.75,
+			0.50, 1.00,
+			1.00, 1.00,
+			0.75, 0.75,
+	
+			0.25, 0.75,
+			0.50, 1.00,
+			1.00, 1.00,
+			0.75, 0.75
+		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
