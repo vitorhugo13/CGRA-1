@@ -24,7 +24,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
-        this.tangram = new MyTangram(this);
+        this.cube = new MyUnitCubeQuad(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -124,7 +124,8 @@ class MyScene extends CGFscene {
 
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        
+        this.cube.display();
+
 
         if (this.displayQuad) {
             this.quadMaterial.apply();

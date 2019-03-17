@@ -105,7 +105,7 @@ class MyTangram extends CGFobject {
 
 		/* TANGRAM MATERIAL */
 		this.scene.tangramMT = new CGFappearance(this.scene);
-        this.scene.tangramMT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.tangramMT.setAmbient(0.7, 0.7, 0.7, 1);
         this.scene.tangramMT.setDiffuse(0.9, 0.9, 0.9, 1);
         this.scene.tangramMT.setSpecular(0.1, 0.1, 0.1, 1);
         this.scene.tangramMT.setShininess(10.0);
