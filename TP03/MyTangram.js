@@ -73,9 +73,6 @@ class MyTangram extends CGFobject {
         this.parallellogramColour.setSpecular(yellow[0],yellow[1], yellow[2], 1.0);
 		this.parallellogramColour.setShininess(10.0);
 
-
-
-
 	}
 
 	enableNormalViz(){
@@ -108,7 +105,10 @@ class MyTangram extends CGFobject {
 		this.scene.pushMatrix();
 		this.scene.multMatrix(tra);
 		this.scene.multMatrix(rot);
-		this.diamondColour.apply();
+		
+		this.scene.customMaterial.apply();	
+		//this.diamondColour.apply();
+		
 		this.scene.diamond.display();
 		this.scene.popMatrix();
 

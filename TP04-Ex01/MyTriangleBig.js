@@ -9,7 +9,7 @@ class MyTriangleBig extends CGFobject {
 			 0,  2, 0,	//1
 			 2,  0, 0,	//2
 
-			 -2,  0, 0,	//0
+			-2,  0, 0,	//0
 			 0,  2, 0,	//1
 			 2,  0, 0	//2
 		];
@@ -32,5 +32,9 @@ class MyTriangleBig extends CGFobject {
 		];
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
+	}
+	updateTexCoords(coords) {
+		this.texCoords = [...coords];
+		this.updateTexCoordsGLBuffers();
 	}
 }
