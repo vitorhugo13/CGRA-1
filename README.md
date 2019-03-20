@@ -15,16 +15,16 @@ All code developed for the TP classes of the CGRA course
 * **Project A** - *Application of the above*
 
 #### TP01
-* **Specification** : [Portuguese]()
+* **Specification** : [Portuguese](specifications/tp01.pdf)
 
 #### TP02
-* **Specification** : [Portuguese]()
+* **Specification** : [Portuguese](specifications/tp02.pdf)
 
 #### TP03
-* **Specification** : [Portuguese]()
+* **Specification** : [Portuguese](specifications/tp03.pdf)
 
 #### TP04
-* **Specification** : [Portuguese]()
+* **Specification** : [Portuguese](specifications/tp04.pdf)
 
 #### Project A
-* **Specification** : [Portuguese](projA/specification.pdf)
+* **Specification** : [Portuguese](specifications/projA.pdf)
