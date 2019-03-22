@@ -8,11 +8,11 @@ All code developed for the TP classes of the CGRA course
 * **Contributors** : [Bernardo Santos](https://github.com/bernas670), [Vítor Gonçalves](https://github.com/torrinheira)
 
 ### Table of Contents
-* [**TP01**]() - Setup and GUI
-* [**TP02**]() - Geometry and Transformations
-* [**TP03**]() - Ilumination and Materials
-* [**TP04**]() - Texture Application
-* [**Project A**]() - *Application of the above*
+* [**TP01**](#tp01---setup-and-gui) - Setup and GUI
+* [**TP02**](#tp02---geometry-and-transformations) - Geometry and Transformations
+* [**TP03**](#tp03---ilumination-and-materials) - Ilumination and Materials
+* [**TP04**](#tp04---texture-application) - Texture Application
+* [**Project A**](#project-a) - *Application of the above*
 
 #### TP01 - Setup and GUI
 * **Specification** : [Portuguese](specifications/tp01.pdf)
