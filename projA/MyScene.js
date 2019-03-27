@@ -21,7 +21,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.prism = new MyPrism(this, 8, 2);
+        this.cilinder = new MyCilinder(this, 4, 2);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -61,16 +61,16 @@ class MyScene extends CGFscene {
 
         // Display normals
         if (this.displayNormals)
-            this.prism.enableNormalViz();
+            this.cilinder.enableNormalViz();
         else
-            this.prism.disableNormalViz();
+            this.cilinder.disableNormalViz();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        this.prism.display();
+        this.cilinder.display();
 
         // ---- END Primitive drawing section
     }
