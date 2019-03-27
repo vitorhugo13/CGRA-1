@@ -21,7 +21,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.prism = new MyPrism(this, 8);
+        this.prism = new MyPrism(this, 8, 2);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
