@@ -38,7 +38,7 @@ class MyUnitCubeQuad extends CGFobject {
     display() {
 
         // SIDE FACES
-        this.scene.cubeSideMT.apply();
+       
 
         this.scene.pushMatrix();
         this.scene.translate(0.0, 0.0, 0.5);
@@ -65,7 +65,7 @@ class MyUnitCubeQuad extends CGFobject {
 
 
         // TOP FACE
-        this.scene.cubeTopMT.apply();
+       
 
         this.scene.pushMatrix();
         this.scene.translate(0.0, 0.5, 0.0);
@@ -74,7 +74,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.popMatrix();
 
         // BOTTOM FACE
-        this.scene.cubeBottomMT.apply();
+       
 
         this.scene.pushMatrix();
         this.scene.translate(0.0, -0.5, 0.0);
