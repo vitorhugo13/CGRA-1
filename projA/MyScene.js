@@ -22,7 +22,11 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+<<<<<<< HEAD
         this.cilinder = new Cube(this);
+=======
+        this.cilinder = new MyCone(this, 10);
+>>>>>>> ea1e1debec4df6c1e43f14ebbe00d369a9dea35b
 
         //Objects connected to MyInterface
         this.displayAxis = true;
