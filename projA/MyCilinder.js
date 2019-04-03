@@ -46,8 +46,8 @@ class MyCilinder extends CGFobject {
             this.vertices.push(ca, 0, -sa);
             this.vertices.push(ca, this.height, -sa);
             
-            this.texCoords.push(sCoord + sDelta, 1);
-            this.texCoords.push(sCoord + sDelta, 0);
+            this.texCoords.push(sCoord, 1);
+            this.texCoords.push(sCoord, 0);
             
             var normal = [ ca, 0, -sa ];
 
@@ -77,4 +77,6 @@ class MyCilinder extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
+
+
 }

@@ -28,6 +28,15 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
 
+        //Materials
+        this.exemplo = new CGFappearance(this);
+        this.exemplo.setAmbient(0.1, 0.1, 0.1, 1);
+        this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
+        this.exemplo.setShininess(10.0);
+        this.exemplo.loadTexture('textures/pattern.jpg');
+        this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -71,7 +80,9 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        this.exemplo.apply();
         this.cilinder.display();
+        
 
         // ---- END Primitive drawing section
     }
