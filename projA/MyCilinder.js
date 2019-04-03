@@ -40,28 +40,14 @@ class MyCilinder extends CGFobject {
             // in each face will be different
 
             var sa=Math.sin(ang);
-            var saa=Math.sin(ang+alphaAng);
             var ca=Math.cos(ang);
-            var caa=Math.cos(ang+alphaAng);
             
             // add the first edge two times, first and last run of the cycle
-            /*
-            if (i == 0) {
-                this.vertices.push(ca, 0, -sa);
-                this.vertices.push(ca, this.height, -sa);
-            }
-            */
-            this.vertices.push(caa, 0, -saa);
-            this.vertices.push(caa, this.height, -saa);
-            /*
-            if (i == 0) {
-            this.texCoords.push(sCoord, 1);
-            this.texCoords.push(sCoord, 0);
-            }
-            */
+            this.vertices.push(ca, 0, -sa);
+            this.vertices.push(ca, this.height, -sa);
+            
             this.texCoords.push(sCoord + sDelta, 1);
             this.texCoords.push(sCoord + sDelta, 0);
-            
             
             var normal = [ ca, 0, -sa ];
 
@@ -76,17 +62,13 @@ class MyCilinder extends CGFobject {
             normal[2]/=nsize;
 
             // push normal once for each vertex of this rectangle
-            /*
-            if (i == 0) {
-                this.normals.push(...normal);
-                this.normals.push(...normal);
-            }
-            */
             this.normals.push(...normal);
             this.normals.push(...normal);
             
-            this.indices.push(2 * i, (2 * i + 2), (2 * i + 1));
-            this.indices.push((2 * i + 1), (2 * i + 2), (2 * i + 3));
+            if (i != this.slices) {
+                this.indices.push(2 * i, (2 * i + 2), (2 * i + 1));
+                this.indices.push((2 * i + 1), (2 * i + 2), (2 * i + 3));
+            }
             
             ang += alphaAng;
             sCoord += sDelta;

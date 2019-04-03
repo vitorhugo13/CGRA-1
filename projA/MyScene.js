@@ -18,10 +18,11 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.cilinder = new MyCilinder(this, 4, 2);
+        this.cilinder = new MyCilinder(this, 10, 2);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
