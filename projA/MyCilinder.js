@@ -34,7 +34,7 @@ class MyCilinder extends CGFobject {
         t
         */
 
-        for (var i = 0; i < this.slices; i++) {
+        for (var i = 0; i <= this.slices; i++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
             // in each face will be different
@@ -45,17 +45,20 @@ class MyCilinder extends CGFobject {
             var caa=Math.cos(ang+alphaAng);
             
             // add the first edge two times, first and last run of the cycle
+            /*
             if (i == 0) {
                 this.vertices.push(ca, 0, -sa);
                 this.vertices.push(ca, this.height, -sa);
             }
+            */
             this.vertices.push(caa, 0, -saa);
             this.vertices.push(caa, this.height, -saa);
-
+            /*
             if (i == 0) {
             this.texCoords.push(sCoord, 1);
             this.texCoords.push(sCoord, 0);
             }
+            */
             this.texCoords.push(sCoord + sDelta, 1);
             this.texCoords.push(sCoord + sDelta, 0);
             
@@ -73,10 +76,12 @@ class MyCilinder extends CGFobject {
             normal[2]/=nsize;
 
             // push normal once for each vertex of this rectangle
+            /*
             if (i == 0) {
                 this.normals.push(...normal);
                 this.normals.push(...normal);
             }
+            */
             this.normals.push(...normal);
             this.normals.push(...normal);
             
