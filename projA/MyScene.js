@@ -23,7 +23,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cilinder = new MyCone(this, 4);
-        this.voxelHill=new MyVoxelHill(this,2);
+        this.voxelHill=new MyVoxelHill(this,1);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -83,6 +83,7 @@ class MyScene extends CGFscene {
 
         this.exemplo.apply();
         this.cilinder.display();
+        
         
 
         // ---- END Primitive drawing section

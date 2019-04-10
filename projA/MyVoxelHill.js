@@ -17,7 +17,7 @@ class MyVoxelHill extends CGFobject{
     display(){
         //brincar com as transformações e com o nº de levels
         for(var i=0; i<levels; i++){
-            
+            this.cube.display();
         }
     }
 }
