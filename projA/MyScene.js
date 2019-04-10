@@ -22,8 +22,6 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.cilinder = new MyCone(this, 4);
-        this.voxelHill=new MyVoxelHill(this,2);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -35,10 +33,10 @@ class MyScene extends CGFscene {
         this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
         this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
         this.exemplo.setShininess(10.0);
-        this.exemplo.loadTexture('textures/ex.png');
+        this.exemplo.loadTexture('textures/test.jpg');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.tree = new MyTree(this, 3, 1.5, 3, 2, this.exemplo, this.exemplo);
+        this.tree = new MyTreeRowPatch(this);
 
     }
     initLights() {
