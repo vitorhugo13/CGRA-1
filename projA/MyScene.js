@@ -38,6 +38,8 @@ class MyScene extends CGFscene {
         this.exemplo.loadTexture('textures/ex.png');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.tree = new MyTree(this, 3, 1.5, 3, 2, this.exemplo, this.exemplo);
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -72,17 +74,16 @@ class MyScene extends CGFscene {
 
         // Display normals
         if (this.displayNormals)
-            this.cilinder.enableNormalViz();
+            this.tree.enableNormalViz();
         else
-            this.cilinder.disableNormalViz();
+            this.tree.disableNormalViz();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        this.exemplo.apply();
-        this.cilinder.display();
+        this.tree.display();
         
         
 

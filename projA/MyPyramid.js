@@ -3,16 +3,16 @@
 * @constructor
 */
 class MyPyramid extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices) {
         super(scene);
         this.slices = slices;
-        this.stacks = stacks;
         this.initBuffers();
     }
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;
@@ -55,19 +55,15 @@ class MyPyramid extends CGFobject {
 
             this.indices.push(3*i, (3*i+1) , (3*i+2) );
 
+            this.texCoords.push(0.5, 0.5);
+            this.texCoords.push(ca * 0.5 + 0.5, sa * 0.5 + 0.5);
+            this.texCoords.push(caa * 0.5 + 0.5, saa * 0.5 + 0.5);
+
             ang+=alphaAng;
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    }
-    
-    updateBuffers(complexity){
-        this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
-
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
     }
 }
 

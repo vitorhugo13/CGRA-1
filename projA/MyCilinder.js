@@ -4,11 +4,10 @@
  */
 
 class MyCilinder extends CGFobject {
-    constructor(scene, slices, height) {
+    constructor(scene, slices) {
         super(scene);
         
         this.slices = slices;
-        this.height = height;
 
         this.initBuffers();
     }
@@ -24,16 +23,6 @@ class MyCilinder extends CGFobject {
         var sCoord = 0;
         var sDelta = 1 / this.slices;
 
-        /*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
-
         for (var i = 0; i <= this.slices; i++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
@@ -44,7 +33,7 @@ class MyCilinder extends CGFobject {
             
             // add the first edge two times, first and last run of the cycle
             this.vertices.push(ca, 0, -sa);
-            this.vertices.push(ca, this.height, -sa);
+            this.vertices.push(ca, 1, -sa);
             
             this.texCoords.push(sCoord, 1);
             this.texCoords.push(sCoord, 0);

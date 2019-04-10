@@ -11,8 +11,9 @@ All code developed for the TP classes of the CGRA course
 * [**TP01**](#tp01---setup-and-gui) - Setup and GUI
 * [**TP02**](#tp02---geometry-and-transformations) - Geometry and Transformations
 * [**TP03**](#tp03---ilumination-and-materials) - Ilumination and Materials
-* [**TP04**](#tp04---texture-application) - Texture Application
+* [**TP04**](#tp04---texture) - Textures
 * [**Project A**](#project-a) - *Application of the above*
+* [**TP05**](#tp05---shaders) - Shaders
 
 #### TP01 - Setup and GUI
 * **Specification** : [Portuguese](specifications/tp01.pdf)
@@ -23,8 +24,12 @@ All code developed for the TP classes of the CGRA course
 #### TP03 - Ilumination and Materials
 * **Specification** : [Portuguese](specifications/tp03.pdf)
 
-#### TP04 - Texture Application
+#### TP04 - Textures
 * **Specification** : [Portuguese](specifications/tp04.pdf)
 
 #### Project A
 * **Specification** : [Portuguese](specifications/projA.pdf)
+
+#### TP05 - Shaders
+* **Specification** : [Portuguese](specifications/tp05.pdf)
+

@@ -4,11 +4,10 @@
  */
 
 class MyPrism extends CGFobject {
-    constructor(scene, slices, height) {
+    constructor(scene, slices) {
         super(scene);
         
         this.slices = slices;
-        this.height = height;
 
         this.initBuffers();
     }
@@ -45,9 +44,9 @@ class MyPrism extends CGFobject {
             var caa=Math.cos(ang+alphaAng);
 
             this.vertices.push(ca, 0, -sa);
-            this.vertices.push(ca, this.height, -sa);
+            this.vertices.push(ca, 1, -sa);
             this.vertices.push(caa, 0, -saa);
-            this.vertices.push(caa, this.height, -saa);
+            this.vertices.push(caa, 1, -saa);
 
             this.texCoords.push(sCoord, 1);
             this.texCoords.push(sCoord, 0);
