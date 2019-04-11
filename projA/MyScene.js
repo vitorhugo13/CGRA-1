@@ -36,7 +36,7 @@ class MyScene extends CGFscene {
         this.exemplo.loadTexture('textures/test.jpg');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.tree = new MyTreeGroupPatch(this);
+        this.testObj = new MyHouse(this);
 
     }
     initLights() {
@@ -72,16 +72,16 @@ class MyScene extends CGFscene {
 
         // Display normals
         if (this.displayNormals)
-            this.tree.enableNormalViz();
+            this.testObj.enableNormalViz();
         else
-            this.tree.disableNormalViz();
+            this.testObj.disableNormalViz();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        this.tree.display();
+        this.testObj.display();
         
 
         // ---- END Primitive drawing section
