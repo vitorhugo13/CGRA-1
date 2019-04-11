@@ -36,7 +36,7 @@ class MyScene extends CGFscene {
         this.exemplo.loadTexture('textures/test.jpg');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.tree = new MyTreeRowPatch(this);
+        this.tree = new MyTreeGroupPatch(this);
 
     }
     initLights() {
