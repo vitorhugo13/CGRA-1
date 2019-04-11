@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
         this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
         this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
         this.exemplo.setShininess(10.0);
-        this.exemplo.loadTexture('textures/ex.png');
+        this.exemplo.loadTexture('textures/test.jpg');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
         //VoxHill
