@@ -9,13 +9,13 @@ class MyTreeGroupPatch extends CGFobject{
         this.x_coord = [];
         this.z_coord = [];
 
-        this.tree = new MyTree(this.scene, 0.3, 0.3, 1.2, 0.6, this.scene.exemplo, this.scene.exemplo);
+        this.tree = new MyTree(this.scene, 0.3, 0.3, 1.2, 0.6, 0, 0);   // ADD TEXTURES HERE
 
         // generate positions
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
-                this.x_coord.push( i * 2 + (Math.random() * 5) / 5);
-                this.z_coord.push( j * 2 + (Math.random() * 5) / 5);
+                this.x_coord.push( i * 2 + (Math.random() * 100) / 100);
+                this.z_coord.push( j * 2 + (Math.random() * 100) / 100);
             }
         }
     }
