@@ -16,6 +16,37 @@ class MyHouse extends CGFobject {
 
         this.cube.display();
 
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI / 4, 0, 1, 0);
+        this.scene.translate(0, 1, 0);
+        this.scene.scale(1.15, 0.45, 1.15);
+        this.roof.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.605, 0, 0.605);
+        this.scene.scale(0.10, 1, 0.10);
+        this.pillar.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.605, 0, -0.605);
+        this.scene.scale(0.10, 1, 0.10);
+        this.pillar.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.605, 0, 0.605);
+        this.scene.scale(0.10, 1, 0.10);
+        this.pillar.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.605, 0, -0.605);
+        this.scene.scale(0.10, 1, 0.10);
+        this.pillar.display();
+        this.scene.popMatrix();
+
     }
 
     enableNormalViz() {

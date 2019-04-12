@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.testObj = new MyVoxelHill(this, 4, this.vox);
+        this.testObj = new MyHouse(this);
 
     }
     initLights() {
@@ -93,10 +93,10 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
 
-        //this.pushMatrix();
-        //this.scale(0.1, 0.1, 0.1);        
+        this.pushMatrix();
+        this.scale(2, 2, 2);        
         this.testObj.display();
-        //this.popMatrix();
+        this.popMatrix();
         
         
 
