@@ -47,7 +47,7 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.voxelHill=new MyVoxelHill(this,4,this.vox);
+        this.voxelHill=new MyVoxelHill(this, 4, this.vox);
 
     }
     initLights() {
@@ -82,19 +82,23 @@ class MyScene extends CGFscene {
         }
 
         // Display normals
+        /*
         if (this.displayNormals)
             this.testObj.enableNormalViz();
         else
             this.testObj.disableNormalViz();
-
+        */
+        
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-        
 
+        //this.pushMatrix();
+        //this.scale(0.1, 0.1, 0.1);        
         this.voxelHill.display();
+        //this.popMatrix();
         
         
 
