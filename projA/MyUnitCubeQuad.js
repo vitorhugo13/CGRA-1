@@ -2,7 +2,7 @@ class MyUnitCubeQuad extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
-        this.initMaterials();
+        //this.initMaterials();
     }
 
     initBuffers() {

@@ -21,9 +21,7 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.cilinder = new MyCone(this, 4);
-       
+        this.axis = new CGFaxis(this);       
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -47,7 +45,7 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.voxelHill=new MyVoxelHill(this, 4, this.vox);
+        this.testObj = new MyVoxelHill(this, 4, this.vox);
 
     }
     initLights() {
@@ -82,12 +80,12 @@ class MyScene extends CGFscene {
         }
 
         // Display normals
-        /*
+        
         if (this.displayNormals)
             this.testObj.enableNormalViz();
         else
             this.testObj.disableNormalViz();
-        */
+        
         
         //Apply default appearance
         this.setDefaultAppearance();
@@ -97,7 +95,7 @@ class MyScene extends CGFscene {
 
         //this.pushMatrix();
         //this.scale(0.1, 0.1, 0.1);        
-        this.voxelHill.display();
+        this.testObj.display();
         //this.popMatrix();
         
         
