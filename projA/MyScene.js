@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
 
         //Materials
+        //testes
         this.exemplo = new CGFappearance(this);
         this.exemplo.setAmbient(0.1, 0.1, 0.1, 1);
         this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -47,9 +48,20 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
+        //CubeMap
+        this.cmap = new CGFappearance(this);
+        this.cmap.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cmap.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cmap.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cmap.setShininess(10.0);
+        this.cmap.loadTexture('images/cubeBox.jpg');
+        this.cmap.setTextureWrap('REPEAT', 'REPEAT');
+
+
 
         this.tree = new MyTree(this, 3, 1.5, 3, 2, this.exemplo, this.exemplo);
-        this.voxelHill=new MyVoxelHill(this,4,this.vox);
+        this.voxelHill= new MyVoxelHill(this,4,this.vox);
+        this.cubeMap= new MyCubeMap(this,this.cmap);
 
     }
     initLights() {
@@ -95,7 +107,8 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
        // this.tree.display();
-        this.voxelHill.display();
+        //this.voxelHill.display();
+        this.cubeMap.display();
         
         
 

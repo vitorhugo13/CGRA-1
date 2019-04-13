@@ -6,14 +6,15 @@
 */
 
 class MyCubeMap extends CGFobject{
-    constructor(scene){
+    constructor(scene,texture){
 
         super(scene);
-        this.initBuffer();
+        this.initBuffers();
+        this.texture=texture;
 
     }
 
-    initBuffer(){
+    initBuffers(){
 
         this.vertices = [
             -0.5, -0.5,  0.5,   // 0
@@ -132,7 +133,7 @@ class MyCubeMap extends CGFobject{
                 (1.0/4.0),(1.0/3.0),
                 0,(1.0/3.0),
                 (3.0/4.0),(1.0/3.0),
-                (2.0/4.0),(1.0/3.0)
+                (2.0/4.0),(1.0/3.0),
 
             //right and left
                 (1.0/4.0),(2.0/3.0),
@@ -147,6 +148,16 @@ class MyCubeMap extends CGFobject{
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
-		this.initGLBuffers();
+        this.initGLBuffers();
     }
+
+
+
+    display(){
+        this.scene.pushMatrix();
+        this.scene.scale(5,5,5);
+        this.texture.apply();
+        this.scene.display();
+        this.scene.popMatrix();
+    }  
 }
