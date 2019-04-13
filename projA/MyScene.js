@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.testObj = new MyHouse(this);
+        this.testObj = new MyCubeMap(this);
 
     }
     initLights() {
@@ -94,7 +94,7 @@ class MyScene extends CGFscene {
 
 
         this.pushMatrix();
-        this.scale(2, 2, 2);        
+        //this.scale(2, 2, 2);        
         this.testObj.display();
         this.popMatrix();
         
