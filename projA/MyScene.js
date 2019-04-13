@@ -21,9 +21,7 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.cilinder = new MyCone(this, 4);
-       
+        this.axis = new CGFaxis(this);       
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -62,6 +60,7 @@ class MyScene extends CGFscene {
         this.tree = new MyTree(this, 3, 1.5, 3, 2, this.exemplo, this.exemplo);
         this.voxelHill= new MyVoxelHill(this,4,this.vox);
         this.cubeMap= new MyCubeMap(this,this.cmap);
+        this.testObj = new MyHouse(this);
 
     }
     initLights() {
@@ -96,20 +95,25 @@ class MyScene extends CGFscene {
         }
 
         // Display normals
+        
         if (this.displayNormals)
-            this.tree.enableNormalViz();
+            this.testObj.enableNormalViz();
         else
-            this.tree.disableNormalViz();
-
+            this.testObj.disableNormalViz();
+        
+        
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
-       // this.tree.display();
-        //this.voxelHill.display();
-        this.cubeMap.display();
+
+        this.pushMatrix();
+        this.scale(2, 2, 2);        
+        this.testObj.display();
+        this.popMatrix();
         
+        this.cubeMap.display();
         
 
         // ---- END Primitive drawing section

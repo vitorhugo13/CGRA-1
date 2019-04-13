@@ -2,11 +2,11 @@ class MyUnitCubeQuad extends CGFobject {
     constructor(scene) {
         super(scene);
         this.initBuffers();
-        this.initMaterials();
+        //this.initMaterials();
     }
 
     initBuffers() {
-        this.scene.quad = new MyQuad(this.scene);
+        this.quad = new MyQuad(this.scene);
     }
 
     initMaterials() {
@@ -38,29 +38,27 @@ class MyUnitCubeQuad extends CGFobject {
     display() {
 
         // SIDE FACES
-       
-
         this.scene.pushMatrix();
-        this.scene.translate(0.0, 0.0, 0.5);
-        this.scene.quad.display();
+        this.scene.translate(0.0, 0.5, 0.5);
+        this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.5, 0.0, 0.0);
+        this.scene.translate(0.5, 0.5, 0.0);
         this.scene.rotate(Math.PI / 2.0, 0, 1, 0);
-        this.scene.quad.display();
+        this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0.0, 0.0, -0.5);
+        this.scene.translate(0.0, 0.5, -0.5);
         this.scene.rotate(Math.PI, 0, 1, 0);
-        this.scene.quad.display();
+        this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.5, 0.0, 0.0);
+        this.scene.translate(-0.5, 0.5, 0.0);
         this.scene.rotate(-Math.PI / 2.0, 0, 1, 0);
-        this.scene.quad.display();
+        this.quad.display();
         this.scene.popMatrix();
 
 
@@ -68,18 +66,26 @@ class MyUnitCubeQuad extends CGFobject {
        
 
         this.scene.pushMatrix();
-        this.scene.translate(0.0, 0.5, 0.0);
+        this.scene.translate(0.0, 1.0, 0.0);
         this.scene.rotate(-Math.PI / 2.0, 1, 0, 0);
-        this.scene.quad.display();
+        this.quad.display();
         this.scene.popMatrix();
 
         // BOTTOM FACE
        
 
         this.scene.pushMatrix();
-        this.scene.translate(0.0, -0.5, 0.0);
+        this.scene.translate(0.0, 0.0, 0.0);
         this.scene.rotate(Math.PI / 2.0, 1, 0, 0);
-        this.scene.quad.display();
+        this.quad.display();
         this.scene.popMatrix();
+    }
+
+    enableNormalViz() {
+        this.quad.enableNormalViz();
+    }
+    
+    disableNormalViz() {
+        this.quad.disableNormalViz();
     }
 }
