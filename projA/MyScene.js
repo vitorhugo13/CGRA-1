@@ -109,11 +109,16 @@ class MyScene extends CGFscene {
 
 
         this.pushMatrix();
+        this.scale(5,5,5);
+        this.cubeMap.display();
+        this.popMatrix();
+
+        this.pushMatrix();
         this.scale(2, 2, 2);        
         this.testObj.display();
         this.popMatrix();
         
-        this.cubeMap.display();
+     
         
 
         // ---- END Primitive drawing section

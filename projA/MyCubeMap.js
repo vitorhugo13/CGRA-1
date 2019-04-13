@@ -154,10 +154,9 @@ class MyCubeMap extends CGFobject{
 
 
     display(){
-        this.scene.pushMatrix();
-        this.scene.scale(5,5,5);
+      
         this.texture.apply();
         this.scene.display();
-        this.scene.popMatrix();
+     
     }  
 }
