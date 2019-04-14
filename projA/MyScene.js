@@ -24,7 +24,8 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.ground = new MyQuad(this);
-        this.lantern = new MyLantern(this);    
+        this.lantern = new MyLantern(this);
+        this.house = new MyHouse(this); 
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -61,6 +62,7 @@ class MyScene extends CGFscene {
         this.testObj= new MyCubeMap(this);
 
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -134,7 +136,7 @@ class MyScene extends CGFscene {
         // display the ground (base of the scene)
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
-        this.scale(30, 30, 1);
+        this.scale(50, 50, 1);
         this.ground.display();
         this.popMatrix();
 
@@ -144,8 +146,18 @@ class MyScene extends CGFscene {
         this.testObj.display();
         this.popMatrix();
 
+        // display house
+        this.pushMatrix();
+        this.scale(2,2,2);
+        this.house.display();
+        this.popMatrix();
+
         // display the lantern
+        this.pushMatrix();
+        this.translate(2.5, 0, 2.5);
+        this.scale(0.25, 0.25, 0.25);
         this.lantern.display();
+        this.popMatrix();
             
 
         // ---- END Primitive drawing section
