@@ -125,6 +125,8 @@ class MyScene extends CGFscene {
         this.ground = new MyQuad(this);
         this.lantern = new MyLantern(this,this.black,this.grey,this.red);
         this.house = new MyHouse(this,this.rooft,this.houset,this.pillart); 
+        this.voxHill1= new MyVoxelHill(this,4,this.vox);
+        this.voxHill2 = new MyVoxelHill(this,3,this.vox);
         this.testObj= new MyCubeMap(this);
 
     }
@@ -224,6 +226,22 @@ class MyScene extends CGFscene {
         this.translate(2.5, 0, 2.5);
         this.scale(0.25, 0.25, 0.25);
         this.lantern.display();
+        this.popMatrix();
+
+        //display VoxelHill
+        this.pushMatrix();
+        this.translate(11,0,9);
+        this.voxHill1.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-21,0,-11);
+        this.voxHill2.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(20,0,-21);
+        this.voxHill2.display();
         this.popMatrix();
             
 
