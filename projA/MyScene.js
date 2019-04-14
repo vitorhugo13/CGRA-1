@@ -6,6 +6,7 @@ class MyScene extends CGFscene {
     constructor() {
         super();
     }
+
     init(application) {
         super.init(application);
         this.initCameras();
@@ -21,7 +22,8 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);       
+        this.axis = new CGFaxis(this);
+        this.ground = new MyQuad(this);     
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -64,15 +66,19 @@ class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, 25), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -102,9 +108,15 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        // display the ground (base of the scene)
+        this.pushMatrix();
+        this.rotate(-Math.PI/2, 1, 0, 0);
+        this.scale(30, 30, 1);
+        this.ground.display();
+        this.popMatrix();
+
 
         this.pushMatrix();
-        //this.scale(2, 2, 2);  
         this.cmap.apply();      
         this.testObj.display();
         this.popMatrix();
