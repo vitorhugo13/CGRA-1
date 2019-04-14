@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
 
         //Materials
+        //testes
         this.exemplo = new CGFappearance(this);
         this.exemplo.setAmbient(0.1, 0.1, 0.1, 1);
         this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -45,7 +46,16 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.testObj = new MyCubeMap(this);
+        //CubeMap
+        this.cmap = new CGFappearance(this);
+        this.cmap.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cmap.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cmap.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cmap.setShininess(10.0);
+        this.cmap.loadTexture('images/CubeMap.png');
+        this.cmap.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.testObj= new MyCubeMap(this);
 
     }
     initLights() {
@@ -94,11 +104,11 @@ class MyScene extends CGFscene {
 
 
         this.pushMatrix();
-        //this.scale(2, 2, 2);        
+        //this.scale(2, 2, 2);  
+        this.cmap.apply();      
         this.testObj.display();
         this.popMatrix();
-        
-        
+            
 
         // ---- END Primitive drawing section
     }
