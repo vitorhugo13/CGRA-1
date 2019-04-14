@@ -1,6 +1,10 @@
 class MyLantern extends CGFobject {
-    constructor(scene) {
+    constructor(scene,blackT,greyT,redT) {
         super(scene);
+
+        this.blackT=blackT;
+        this.greyT=greyT;
+        this.redT=redT;
 
         this.initBuffers();
         this.initMaterials();
@@ -31,14 +35,14 @@ class MyLantern extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.scale(1, 0.1, 1);
-        this.baseTexture.apply();
+        this.blackT.apply();
         this.base.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 0, 1, 0);
         this.scene.scale(0.5, 1, 0.5);
-        this.lightTexture.apply();
+        this.redT.apply();
         this.prism.display();
         this.scene.popMatrix();
 
@@ -46,6 +50,7 @@ class MyLantern extends CGFobject {
         this.scene.rotate(Math.PI/4, 0, 1, 0);
         this.scene.translate(0, 0.9, 0);
         this.scene.scale(0.8, 0.4, 0.8);
+        this.greyT.apply();
         this.pyramid.display();
         this.scene.popMatrix();
     }
