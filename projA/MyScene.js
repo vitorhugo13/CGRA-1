@@ -21,11 +21,7 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
-        //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.ground = new MyQuad(this);
-        this.lantern = new MyLantern(this);
-        this.house = new MyHouse(this); 
+     
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -50,6 +46,33 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
+        //house roof texture
+        this.rooft = new CGFappearance(this);
+        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rooft.setShininess(10.0);
+        this.rooft.loadTexture('images/r4.jpg');
+        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
+
+         //house texture
+         this.houset = new CGFappearance(this);
+         this.houset.setAmbient(0.1, 0.1, 0.1, 1);
+         this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
+         this.houset.setSpecular(0.1, 0.1, 0.1, 1);
+         this.houset.setShininess(10.0);
+         this.houset.loadTexture('images/wood.jpg');
+         this.houset.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house pillar texture
+        this.pillart = new CGFappearance(this);
+        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillart.setShininess(10.0);
+        this.pillart.loadTexture('images/pillar.jpg');
+        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
+
         //CubeMap
         this.cmap = new CGFappearance(this);
         this.cmap.setAmbient(0.1, 0.1, 0.1, 1);
@@ -59,6 +82,21 @@ class MyScene extends CGFscene {
         this.cmap.loadTexture('images/CubeMap.png');
         this.cmap.setTextureWrap('REPEAT', 'REPEAT');
 
+        //grass
+        this.grass = new CGFappearance(this);
+        this.grass.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grass.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grass.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grass.setShininess(10.0);
+        this.grass.loadTexture('images/g2.jpg');
+        this.grass.setTextureWrap('REPEAT', 'REPEAT');
+
+
+        //Initialize scene objects
+        this.axis = new CGFaxis(this);
+        this.ground = new MyQuad(this);
+        this.lantern = new MyLantern(this);
+        this.house = new MyHouse(this,this.rooft,this.houset,this.pillart); 
         this.testObj= new MyCubeMap(this);
 
     }
@@ -137,6 +175,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.scale(50, 50, 1);
+        this.grass.apply(); //probably not correct
         this.ground.display();
         this.popMatrix();
 
