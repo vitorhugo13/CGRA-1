@@ -71,7 +71,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, 30), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 12, 50), vec3.fromValues(0, 0, 0));
     }
 
     hexToRgbA(hex)
@@ -120,14 +120,6 @@ class MyScene extends CGFscene {
         if (this.displayAxis) {
             this.axis.display();
         }
-
-        // Display normals
-        
-        if (this.displayNormals)
-            this.testObj.enableNormalViz();
-        else
-            this.testObj.disableNormalViz();
-        
         
         //Apply default appearance
         this.setDefaultAppearance();
