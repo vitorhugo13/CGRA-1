@@ -1,15 +1,19 @@
 class MyTreeRowPatch extends CGFobject{
-    constructor(scene) {
+    constructor(scene,trunkT,topT) {
         super(scene);
-        
+
+        this.trunkT=trunkT;
+        this.topT=topT;
+
         this.initBuffers();
+       
     }
 
     initBuffers() {
         this.x_coord = [];
         this.z_coord = [];
 
-        this.tree = new MyTree(this.scene, 0.3, 0.3, 1.2, 0.6, 0, 0);   // ADD TEXTURES HERE
+        this.tree = new MyTree(this.scene, 0.3, 0.3, 1.2, 0.6, this.trunkT, this.topT);   // ADD TEXTURES HERE
 
         // generate positions
         for (var i = 0; i < 9; i++) {
@@ -17,6 +21,7 @@ class MyTreeRowPatch extends CGFobject{
             this.z_coord.push((Math.random() * 100) / 100);
         }
     }
+
 
     display() {
         for (var i = 0; i < 6; i++) {

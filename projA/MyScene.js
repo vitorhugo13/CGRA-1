@@ -110,6 +110,24 @@ class MyScene extends CGFscene {
         this.grass.loadTexture('images/g2.jpg');
         this.grass.setTextureWrap('REPEAT', 'REPEAT');
 
+        //tree top
+        this.topT = new CGFappearance(this);
+        this.topT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.topT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.topT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.topT.setShininess(10.0);
+        this.topT.loadTexture('images/mineTrunk.jpg');
+        this.topT.setTextureWrap('REPEAT', 'REPEAT');
+        
+        //tree trunk
+        this.trunkT = new CGFappearance(this);
+        this.trunkT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.trunkT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.trunkT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.trunkT.setShininess(10.0);
+        this.trunkT.loadTexture('images/mineTree.jpg');
+        this.trunkT.setTextureWrap('REPEAT', 'REPEAT');
+
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -119,6 +137,7 @@ class MyScene extends CGFscene {
         this.voxHill1= new MyVoxelHill(this,4,this.vox);
         this.voxHill2 = new MyVoxelHill(this,3,this.vox);
         this.testObj= new MyCubeMap(this);
+        this.trees= new MyTreeRowPatch(this,this.trunkT,this.topT);
 
     }
 
@@ -225,7 +244,7 @@ class MyScene extends CGFscene {
         this.voxHill1.display();
         this.popMatrix();
 
-        this.pushMatrix();
+       /* this.pushMatrix();
         this.translate(-21,0,-11);
         this.voxHill2.display();
         this.popMatrix();
@@ -234,7 +253,14 @@ class MyScene extends CGFscene {
         this.translate(20,0,-21);
         this.voxHill2.display();
         this.popMatrix();
-            
+
+        */
+        
+        //display trees to text their texture
+        this.pushMatrix();
+        this.translate(-15,0,-12);
+        this.trees.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
