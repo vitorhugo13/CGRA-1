@@ -7,19 +7,11 @@ class MyLantern extends CGFobject {
     }
 
     initMaterials() {
-        let baseColor = this.scene.hexToRgbA("#003312");
-		this.baseTexture = new CGFappearance(this.scene);
-        this.baseTexture.setAmbient(baseColor[0], baseColor[1], baseColor[2], 1.0);
-        this.baseTexture.setDiffuse(baseColor[0]/3.0, baseColor[1]/3.0, baseColor[2]/3.0, 1.0);
-        this.baseTexture.setSpecular(baseColor[0], baseColor[1], baseColor[2], 1.0);
+        this.baseTexture = new CGFappearance(this.scene);
+        this.baseTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.baseTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.baseTexture.setSpecular(0.1, 0.1, 0.1, 1);
         this.baseTexture.setShininess(10.0);
-        
-        baseColor = this.scene.hexToRgbA("#003312");
-		this.lightTexture = new CGFappearance(this.scene);
-        this.lightTexture.setAmbient(baseColor[0], baseColor[1], baseColor[2], 1.0);
-        this.lightTexture.setDiffuse(baseColor[0]/3.0, baseColor[1]/3.0, baseColor[2]/3.0, 1.0);
-        this.lightTexture.setSpecular(baseColor[0], baseColor[1], baseColor[2], 1.0);
-        this.lightTexture.setShininess(10.0);
     }
 
     initBuffers() {
@@ -37,7 +29,6 @@ class MyLantern extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/4, 0, 1, 0);
         this.scene.scale(0.5, 1, 0.5);
-        this.lightTexture.apply();
         this.prism.display();
         this.scene.popMatrix();
 

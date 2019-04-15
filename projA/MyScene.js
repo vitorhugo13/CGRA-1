@@ -19,10 +19,11 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
-        this.enableTextures(true);
-
+        
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+
+        this.cubeMap = new MyCubeMap(this);
         
         this.ground = new MyQuad(this, 50, 50);
         this.lantern = new MyLantern(this);
@@ -36,38 +37,75 @@ class MyScene extends CGFscene {
         this.treeRow1 = new MyTreeRowPatch(this);
         this.treeRow2 = new MyTreeRowPatch(this);
 
+        
+
         //Objects connected to MyInterface
-        this.displayAxis = true;
-        this.displayNormals = false;
+        this.displayAxis = false;
+        this.displayTextures = true;
+        this.timeID = { 'Day' : 0, 'Night' : 1 };
+        this.selectedTime = 0
 
         //Materials
         //testes
-        this.exemplo = new CGFappearance(this);
-        this.exemplo.setAmbient(0.1, 0.1, 0.1, 1);
-        this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
-        this.exemplo.setShininess(10.0);
-        this.exemplo.loadTexture('images/mineTop.png');
-        this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
+        this.groundTexture = new CGFappearance(this);
+        this.groundTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.groundTexture.setDiffuse(1, 1, 1, 1);
+        this.groundTexture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.groundTexture.setShininess(10.0);
+        this.groundTexture.loadTexture('images/mineTop.png');
+        this.groundTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-        //CubeMap
-        this.cmap = new CGFappearance(this);
-        this.cmap.setAmbient(0.1, 0.1, 0.1, 1);
-        this.cmap.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.cmap.setSpecular(0.1, 0.1, 0.1, 1);
-        this.cmap.setShininess(10.0);
-        this.cmap.loadTexture('images/CubeMap.png');
-        this.cmap.setTextureWrap('REPEAT', 'REPEAT');
+        // day-time skybox texture
+        this.day = new CGFappearance(this);
+        this.day.setAmbient(0.1, 0.1, 0.1, 1);
+        this.day.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.day.setSpecular(0.1, 0.1, 0.1, 1);
+        this.day.setShininess(10.0);
+        this.day.loadTexture('images/CubeMap.png');
+        this.day.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.testObj= new MyCubeMap(this);
-
+        // night-time skybox texture
+        this.night = new CGFappearance(this);
+        this.night.setAmbient(0.1, 0.1, 0.1, 1);
+        this.night.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.night.setSpecular(0.1, 0.1, 0.1, 1);
+        this.night.setShininess(10.0);
+        this.night.loadTexture('images/night.jpg');
+        this.night.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+
+        this.globalAmbientLight = 0.1;
+        this.setGlobalAmbientLight(this.globalAmbientLight,this.globalAmbientLight,this.globalAmbientLight,1.0);
+
+        // sun
+        let sun = this.hexToRgbA("#ffffe6")
+        this.lights[0].setPosition(24, 24, 24, 1);        // TODO : change position to match skybox
+        this.lights[0].setDiffuse(sun[0], sun[1], sun[2], 1.0);  // TODO : change color
+        this.lights[0].setSpecular(sun[0], sun[1], sun[2], 1);         // TODO : change color
+        this.lights[0].setConstantAttenuation(1);
         this.lights[0].enable();
         this.lights[0].update();
+
+        // moon
+        let moon = this.hexToRgbA("#ccffff");
+        this.lights[1].setPosition(24, 24, -24, 1);        // TODO : change position to match skybox
+        this.lights[1].setDiffuse(moon[0]/1.1, moon[1]/1.1, moon[2]/1.1, 1.0);  // TODO : change color
+        this.lights[1].setSpecular(moon[0]/1.1, moon[1]/1.1, moon[2]/1.1, 1);         // TODO : change color
+        this.lights[1].setConstantAttenuation(1.5);    
+        this.lights[1].disable();
+        this.lights[1].update();
+
+        // lantern
+        let lantern = this.hexToRgbA("#ff8000");
+        this.lights[2].setPosition(10, 0.2, -3, 1);     // TODO : change positon to match
+        this.lights[2].setDiffuse(lantern[0], lantern[1], lantern[2], 1.0);
+        this.lights[2].setSpecular(lantern[0],lantern[1], lantern[2], 1.0);
+        this.lights[2].setLinearAttenuation(0.1);    // TODO : change attenuation constant
+        this.lights[2].disable();
+        this.lights[2].update();
+    
     }
 
     initCameras() {
@@ -103,8 +141,28 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
+    updateLights() {
+        if (this.selectedTime == 0) {
+            this.lights[0].enable();
+            this.lights[0].update();
+            this.lights[1].disable();
+            this.lights[1].update();
+            this.lights[2].disable();
+            this.lights[2].update();
+        }
+        else {
+            this.lights[0].disable();
+            this.lights[0].update();
+            this.lights[1].enable();
+            this.lights[1].update();
+            this.lights[2].enable();
+            this.lights[2].update();
+        }
+    }
 
     display() {
+        this.enableTextures(this.displayTextures);  
+
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -126,18 +184,23 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        // display the skybox
+        this.pushMatrix();
+        if (this.selectedTime == 0) {
+            this.day.apply();
+        }
+        else {
+            this.night.apply();
+        }
+        this.cubeMap.display();
+        this.popMatrix();
+
         // display the ground (base of the scene)
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.scale(50, 50, 1);
-        this.exemplo.apply();
+        this.groundTexture.apply();
         this.ground.display();
-        this.popMatrix();
-        
-        // display the skybox
-        this.pushMatrix();
-        this.cmap.apply();      
-        this.testObj.display();
         this.popMatrix();
 
         // display house
@@ -190,11 +253,10 @@ class MyScene extends CGFscene {
         this.treeRow2.display();
         this.popMatrix();
         
-
         // display the lantern
         this.pushMatrix();
-        this.translate(2.5, 0, 2.5);
-        this.scale(0.25, 0.25, 0.25);
+        this.translate(10, 0, -3);
+        this.scale(0.5, 0.5, 0.5);
         this.lantern.display();
         this.popMatrix();
             

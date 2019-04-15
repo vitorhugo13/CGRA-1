@@ -8,11 +8,10 @@ class MyHouse extends CGFobject {
     }
 
     initMaterials() {
-        let baseColor = this.scene.hexToRgbA("#003312");
 		this.lightTexture = new CGFappearance(this.scene);
-        this.lightTexture.setAmbient(baseColor[0], baseColor[1], baseColor[2], 1.0);
-        this.lightTexture.setDiffuse(baseColor[0]/3.0, baseColor[1]/3.0, baseColor[2]/3.0, 1.0);
-        this.lightTexture.setSpecular(baseColor[0], baseColor[1], baseColor[2], 1.0);
+        this.lightTexture.setAmbient(0.1, 0.1, 0.1, 1);
+        this.lightTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.lightTexture.setSpecular(0.1, 0.1, 0.1, 1);
         this.lightTexture.setShininess(10.0);
     }
 

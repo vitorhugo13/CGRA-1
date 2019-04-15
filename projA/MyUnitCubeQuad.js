@@ -15,7 +15,7 @@ class MyUnitCubeQuad extends CGFobject {
     display() {
 
         // SIDE FACES
-        this.sideTexture.apply()
+        this.sideTexture.apply();
         this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 
         this.scene.pushMatrix();
