@@ -167,10 +167,18 @@ class MyScene extends CGFscene {
 
         // display treeGroup1
         this.pushMatrix();
-        this.translate(10, 0, -15);
+        this.translate(0, 0, -15);
         this.rotate(Math.PI/4, 0, 1, 0);
         this.scale(1.5, 2, 1.5);
         this.treeGroup1.display();
+        this.popMatrix();
+
+        // display treeGroup2
+        this.pushMatrix();
+        this.translate(7, 0, -8);
+        this.rotate(Math.PI/4, 0, 1, 0);
+        this.scale(1.5, 2, 1.5);
+        this.treeGroup2.display();
         this.popMatrix();
 
         // display the lantern
