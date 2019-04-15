@@ -2,14 +2,8 @@ class MyLantern extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.initBuffers();
         this.initMaterials();
-    }
-
-    initBuffers() {
-        this.prism = new MyPrism(this.scene, 4);
-        this.pyramid = new MyPyramid(this.scene, 4);
-        this.base = new MyUnitCubeQuad(this.scene);
+        this.initBuffers();
     }
 
     initMaterials() {
@@ -28,10 +22,15 @@ class MyLantern extends CGFobject {
         this.lightTexture.setShininess(10.0);
     }
 
+    initBuffers() {
+        this.prism = new MyPrism(this.scene, 4);
+        this.pyramid = new MyPyramid(this.scene, 4);
+        this.base = new MyUnitCubeQuad(this.scene, this.baseTexture, this.baseTexture, this.baseTexture);
+    }
+
     display() {
         this.scene.pushMatrix();
         this.scene.scale(1, 0.1, 1);
-        this.baseTexture.apply();
         this.base.display();
         this.scene.popMatrix();
 

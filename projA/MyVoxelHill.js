@@ -3,18 +3,44 @@
  * 
  */
 class MyVoxelHill extends CGFobject{
-    constructor(scene, levels, texture) {
+    constructor(scene, levels) {
         super(scene);
 
         this.levels=levels;
-        this.texture=texture;
 
+        this.initMaterials();
         this.initBuffers();
+    }
+
+    initMaterials() {
+        this.cubeSideMT = new CGFappearance(this.scene);
+        this.cubeSideMT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeSideMT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeSideMT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeSideMT.setShininess(10.0);
+        this.cubeSideMT.loadTexture('images/mineSide.png');
+        this.cubeSideMT.setTextureWrap('REPEAT', 'REPEAT');
+        
+        this.cubeTopMT = new CGFappearance(this.scene);
+        this.cubeTopMT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeTopMT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeTopMT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeTopMT.setShininess(10.0);
+        this.cubeTopMT.loadTexture('images/mineTop.png');
+        this.cubeTopMT.setTextureWrap('REPEAT', 'REPEAT');
+        
+        this.cubeBottomMT = new CGFappearance(this.scene);
+        this.cubeBottomMT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.cubeBottomMT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.cubeBottomMT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.cubeBottomMT.setShininess(10.0);
+        this.cubeBottomMT.loadTexture('images/mineBottom.png');
+		this.cubeBottomMT.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initBuffers() {
 
-        this.cube = new MyUnitCubeQuad(this.scene);
+        this.cube = new MyUnitCubeQuad(this.scene, this.cubeTopMT, this.cubeSideMT, this.cubeBottomMT);
         this.coords=[];
 
         var num = this.levels * 2 - 2;
@@ -41,7 +67,6 @@ class MyVoxelHill extends CGFobject{
         for (var i = 0; i < this.coords.length / 3; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.coords[i*3], this.coords[i*3+1],this.coords[i*3+2]);
-            this.texture.apply();
             this.cube.display();
             this.scene.popMatrix();
         }

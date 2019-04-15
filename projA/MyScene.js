@@ -25,7 +25,9 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.ground = new MyQuad(this);
         this.lantern = new MyLantern(this);
-        this.house = new MyHouse(this); 
+        this.house = new MyHouse(this);
+        this.smallHill = new MyVoxelHill(this, 3);
+        this.bigHill = new MyVoxelHill(this, 5);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -115,6 +117,7 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
 
+
         // Draw axis
         if (this.displayAxis) {
             this.axis.display();
@@ -139,7 +142,7 @@ class MyScene extends CGFscene {
         this.scale(50, 50, 1);
         this.ground.display();
         this.popMatrix();
-
+        
         // display the skybox
         this.pushMatrix();
         this.cmap.apply();      
@@ -149,8 +152,11 @@ class MyScene extends CGFscene {
         // display house
         this.pushMatrix();
         this.scale(2,2,2);
-        this.house.display();
+        //this.house.display();
         this.popMatrix();
+
+        // display small hill
+        this.smallHill.display();
 
         // display the lantern
         this.pushMatrix();
