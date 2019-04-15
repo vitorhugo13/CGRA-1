@@ -3,9 +3,12 @@
  * 
  */
 class MyQuad extends CGFobject {
-	constructor(scene) {
+	constructor(scene, s, t) {
 		super(scene);
 		this.initBuffers();
+
+		if (s != undefined && t != undefined)
+			this.updateTexCoords(s, t);
 	}
 	
 	initBuffers() {
@@ -50,6 +53,18 @@ class MyQuad extends CGFobject {
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
+	}
+
+	updateTexCoords(s, t) {
+
+		for (var i = 0; i < 4; i++) {
+			this.texCoords[i * 2] *= s;
+			this.texCoords[i * 2 + 1] *= t;
+			console.log(this.texCoords[i * 2]);
+			console.log(this.texCoords[i * 2 + 1]);
+
+		}
+		this.updateTexCoordsGLBuffers();
 	}
 
 }

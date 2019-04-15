@@ -24,7 +24,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         
-        this.ground = new MyQuad(this);
+        this.ground = new MyQuad(this, 50, 50);
         this.lantern = new MyLantern(this);
         this.house = new MyHouse(this);
         
@@ -47,7 +47,7 @@ class MyScene extends CGFscene {
         this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
         this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
         this.exemplo.setShininess(10.0);
-        this.exemplo.loadTexture('textures/test.jpg');
+        this.exemplo.loadTexture('images/mineTop.png');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
 
         //CubeMap
@@ -130,6 +130,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.scale(50, 50, 1);
+        this.exemplo.apply();
         this.ground.display();
         this.popMatrix();
         
@@ -172,6 +173,23 @@ class MyScene extends CGFscene {
         this.scale(1.5, 2, 1.5);
         this.treeGroup2.display();
         this.popMatrix();
+
+        // display treeRow1
+        this.pushMatrix();
+        this.translate(-10, 0, -5);
+        this.rotate(-Math.PI/2.5, 0, 1, 0);
+        this.scale(1.5, 2, 1.5);
+        this.treeRow1.display();
+        this.popMatrix();
+
+        // display treeRow1
+        this.pushMatrix();
+        this.translate(13, 0, -1);
+        this.rotate(-Math.PI/2, 0, 1, 0);
+        this.scale(1.5, 2, 1.5);
+        this.treeRow2.display();
+        this.popMatrix();
+        
 
         // display the lantern
         this.pushMatrix();
