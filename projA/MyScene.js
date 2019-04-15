@@ -181,6 +181,31 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
+    initMaterials(){
+          // Specular material (WATER)
+          let water = this.hexToRgbA("#40a4df");
+          this.specular = new CGFappearance(this);
+          this.specular.setAmbient(water[0], water[1], water[2], 1.0);
+          this.specular.setDiffuse(water[0]/3.0, water[1]/3.0, water[2]/3.0, 1.0);
+          this.specular.setSpecular(water[0], water[1], water[2], 1.0);
+          this.specular.setShininess(10.0);
+  
+          // Diffuse material 1 (STONE)
+          let stone= this.hexToRgbA("#95948b");
+          this.diffuse1 = new CGFappearance(this);
+          this.diffuse1.setAmbient(stone[0], stone[1], stone[2], 1.0);
+          this.diffuse1.setDiffuse(stone[0], stone[1], stone[2], 1.0);
+          this.diffuse1.setSpecular(stone[0]/3.0, stone[1]/3.0, stone[2]/3.0, 1.0);
+          this.diffuse1.setShininess(10.0);
+  
+          // Diffuse material 2 (WOOD)
+          let wood=this.hexToRgbA("#b69b4c");
+          this.diffuse2 = new CGFappearance(this);
+          this.diffuse2.setAmbient(wood[0], wood[1], wood[2], 1.0);
+          this.diffuse2.setDiffuse(wood[0], wood[1], wood[2], 1.0);
+          this.diffuse2.setSpecular(wood[0]/3.0, wood[1]/3.0, wood[2]/3.0, 1.0);
+          this.diffuse2.setShininess(10.0);
+    }
 
     display() {
         // ---- BEGIN Background, camera and axis setup
