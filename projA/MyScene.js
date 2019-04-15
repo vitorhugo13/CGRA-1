@@ -46,32 +46,23 @@ class MyScene extends CGFscene {
         this.vox.loadTexture('textures/mineSide.png');
         this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
-        //black texture for lantern
-        this.black = new CGFappearance(this);
-        this.black.setAmbient(0.1, 0.1, 0.1, 1);
-        this.black.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.black.setSpecular(0.1, 0.1, 0.1, 1);
-        this.black.setShininess(10.0);
-        this.black.loadTexture('images/black.jpg');
-        this.black.setTextureWrap('REPEAT', 'REPEAT');
+        //yellow texture for lantern
+        this.yellow = new CGFappearance(this);
+        this.yellow.setAmbient(0.1, 0.1, 0.1, 1);
+        this.yellow.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
+        this.yellow.setShininess(10.0);
+        this.yellow.loadTexture('images/yellow.jpg');
+        this.yellow.setTextureWrap('REPEAT', 'REPEAT');
 
-        //grey texture for lantern
-        this.grey = new CGFappearance(this);
-        this.grey.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grey.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grey.setSpecular(0.1, 0.1, 0.1, 1);
-        this.grey.setShininess(10.0);
-        this.grey.loadTexture('images/grey.jpg');
-        this.grey.setTextureWrap('REPEAT', 'REPEAT');
-
-        //red texture for lantern
-        this.red = new CGFappearance(this);
-        this.red.setAmbient(0.1, 0.1, 0.1, 1);
-        this.red.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.red.setSpecular(0.1, 0.1, 0.1, 1);
-        this.red.setShininess(10.0);
-        this.red.loadTexture('images/red.jpg');
-        this.red.setTextureWrap('REPEAT', 'REPEAT');
+        //green texture for lantern
+        this.green = new CGFappearance(this);
+        this.green.setAmbient(0.1, 0.1, 0.1, 1);
+        this.green.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.green.setSpecular(0.1, 0.1, 0.1, 1);
+        this.green.setShininess(10.0);
+        this.green.loadTexture('images/green.jpg');
+        this.green.setTextureWrap('REPEAT', 'REPEAT');
 
 
         //house roof texture
@@ -123,7 +114,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.ground = new MyQuad(this);
-        this.lantern = new MyLantern(this,this.black,this.grey,this.red);
+        this.lantern = new MyLantern(this,this.yellow,this.green);
         this.house = new MyHouse(this,this.rooft,this.houset,this.pillart); 
         this.voxHill1= new MyVoxelHill(this,4,this.vox);
         this.voxHill2 = new MyVoxelHill(this,3,this.vox);
