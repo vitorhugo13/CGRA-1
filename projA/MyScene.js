@@ -23,11 +23,18 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+        
         this.ground = new MyQuad(this);
         this.lantern = new MyLantern(this);
         this.house = new MyHouse(this);
+        
         this.smallHill = new MyVoxelHill(this, 3);
         this.bigHill = new MyVoxelHill(this, 5);
+
+        this.treeGroup1 = new MyTreeGroupPatch(this);
+        this.treeGroup2 = new MyTreeGroupPatch(this);
+        this.treeRow1 = new MyTreeRowPatch(this);
+        this.treeRow2 = new MyTreeRowPatch(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -42,15 +49,6 @@ class MyScene extends CGFscene {
         this.exemplo.setShininess(10.0);
         this.exemplo.loadTexture('textures/test.jpg');
         this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
-
-        //VoxHill
-        this.vox = new CGFappearance(this);
-        this.vox.setAmbient(0.1, 0.1, 0.1, 1);
-        this.vox.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.vox.setSpecular(0.1, 0.1, 0.1, 1);
-        this.vox.setShininess(10.0);
-        this.vox.loadTexture('textures/mineSide.png');
-        this.vox.setTextureWrap('REPEAT', 'REPEAT');
 
         //CubeMap
         this.cmap = new CGFappearance(this);
@@ -73,7 +71,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, 25), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 5, 30), vec3.fromValues(0, 0, 0));
     }
 
     hexToRgbA(hex)
@@ -152,11 +150,28 @@ class MyScene extends CGFscene {
         // display house
         this.pushMatrix();
         this.scale(2,2,2);
-        //this.house.display();
+        this.house.display();
         this.popMatrix();
 
         // display small hill
+        this.pushMatrix();
+        this.translate(15, 0, 0);
         this.smallHill.display();
+        this.popMatrix();
+
+        // display big hill
+        this.pushMatrix();
+        this.translate(-15, 0, -20);
+        this.bigHill.display();
+        this.popMatrix();
+
+        // display treeGroup1
+        this.pushMatrix();
+        this.translate(10, 0, -15);
+        this.rotate(Math.PI/4, 0, 1, 0);
+        this.scale(1.5, 2, 1.5);
+        this.treeGroup1.display();
+        this.popMatrix();
 
         // display the lantern
         this.pushMatrix();
