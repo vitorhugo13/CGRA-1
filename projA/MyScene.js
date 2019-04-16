@@ -76,15 +76,15 @@ class MyScene extends CGFscene {
         this.lights[2].setPosition(-12, 0.2, 17, 1);     // TODO : change positon to match
         this.lights[2].setDiffuse(lantern[0], lantern[1], lantern[2], 1.0);
         this.lights[2].setSpecular(lantern[0],lantern[1], lantern[2], 1.0);
-        this.lights[2].setLinearAttenuation(0.1);    // TODO : change attenuation constant
+        this.lights[2].setLinearAttenuation(0.4);    // TODO : change attenuation constant
         this.lights[2].disable();
         this.lights[2].update();
 
         // lantern 2 ( the one on the pool border )
-        this.lights[3].setPosition(-12, 0.2, 17, 1);     // TODO : change positon to match
+        this.lights[3].setPosition(15.5, 0.7, -14.5, 1);     // TODO : change positon to match
         this.lights[3].setDiffuse(lantern[0], lantern[1], lantern[2], 1.0);
         this.lights[3].setSpecular(lantern[0],lantern[1], lantern[2], 1.0);
-        this.lights[3].setLinearAttenuation(0.1);    // TODO : change attenuation constant
+        this.lights[3].setLinearAttenuation(0.4);    // TODO : change attenuation constant
         this.lights[3].disable();
         this.lights[3].update();
     
@@ -342,20 +342,31 @@ class MyScene extends CGFscene {
 
         // display house
         this.pushMatrix();
-        this.scale(2,2,2);
+        this.scale(4,2.5,4);
         this.house.display();
         this.popMatrix();
         
         // display small hill
         this.pushMatrix();
-        this.translate(15, 0, 0);
+        this.translate(18, 0, 12);
+        this.rotate(Math.PI/3, 0, 1, 0);
         this.smallHill.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(10, 0, 6);
+        this.rotate(Math.PI/3, 0, 1, 0);
+        this.bigHill.display();
         this.popMatrix();
 
         // display big hill
         this.pushMatrix();
         this.translate(-15, 0, -20);
         this.bigHill.display();
+        this.popMatrix();
+        this.pushMatrix();
+        this.translate(-17, 0, -10);
+        this.smallHill.display();
         this.popMatrix();
         
         // display treeGroup1
@@ -384,24 +395,38 @@ class MyScene extends CGFscene {
 
         // display treeRow1
         this.pushMatrix();
-        this.translate(13, 0, -1);
+        this.translate(23, 0, -19);
         this.rotate(-Math.PI/2, 0, 1, 0);
-        this.scale(1.5, 2, 1.5);
+        this.scale(2, 2.5, 2);
         this.treeRow2.display();
         this.popMatrix();
         
-        // display the lantern
+        // display lantern 1
         this.pushMatrix();
         this.translate(-12, 0, 17);
         this.scale(0.5, 0.5, 0.5);
         this.lantern.display();
         this.popMatrix();
 
+        // display lantern 2
+        this.pushMatrix();
+        this.translate(11.5, 0.5, -14.5);
+        this.scale(0.5, 0.5, 0.5);
+        this.lantern.display();
+        this.popMatrix();
+
         // display pool
         this.pushMatrix();
-        this.translate(15, 0, -15);
+        this.translate(11, 0, -15);
         this.pool.display();
         this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(5, 0, -22);
+        this.scale(2, 2.5, 2);
+        this.treeRow1.display();
+        this.popMatrix();
+
 
         // ---- END Primitive drawing section
     }
