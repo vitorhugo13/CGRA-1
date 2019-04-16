@@ -171,7 +171,7 @@ class MyScene extends CGFscene {
         
   
         // Diffuse material 2 (WOOD)
-        let wood=this.hexToRgbA("#b69b4c");
+        let wood=this.hexToRgbA("#734d26");
         this.diffuse2 = new CGFappearance(this);
         this.diffuse2.setAmbient(wood[0], wood[1], wood[2], 1.0);
         this.diffuse2.setDiffuse(wood[0], wood[1], wood[2], 1.0);
