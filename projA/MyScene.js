@@ -38,6 +38,8 @@ class MyScene extends CGFscene {
         this.treeRow1 = new MyTreeRowPatch(this, this.trunkT, this.topT);
         this.treeRow2 = new MyTreeRowPatch(this, this.trunkT, this.topT);
 
+        this.pool = new MyPool(this, 7, 5, this.diffuse1, this.diffuse1, this.diffuse1, this.specular);
+
         //Objects connected to MyInterface
         this.displayAxis = false;
         this.displayTextures = true;
@@ -69,14 +71,22 @@ class MyScene extends CGFscene {
         this.lights[1].disable();
         this.lights[1].update();
 
-        // lantern
+        // lantern 1 ( the one in the middle of the trees )
         let lantern = this.hexToRgbA("#ff8000");
-        this.lights[2].setPosition(10, 0.2, -3, 1);     // TODO : change positon to match
+        this.lights[2].setPosition(-12, 0.2, 17, 1);     // TODO : change positon to match
         this.lights[2].setDiffuse(lantern[0], lantern[1], lantern[2], 1.0);
         this.lights[2].setSpecular(lantern[0],lantern[1], lantern[2], 1.0);
         this.lights[2].setLinearAttenuation(0.1);    // TODO : change attenuation constant
         this.lights[2].disable();
         this.lights[2].update();
+
+        // lantern 2 ( the one on the pool border )
+        this.lights[3].setPosition(-12, 0.2, 17, 1);     // TODO : change positon to match
+        this.lights[3].setDiffuse(lantern[0], lantern[1], lantern[2], 1.0);
+        this.lights[3].setSpecular(lantern[0],lantern[1], lantern[2], 1.0);
+        this.lights[3].setLinearAttenuation(0.1);    // TODO : change attenuation constant
+        this.lights[3].disable();
+        this.lights[3].update();
     
     }
 
@@ -121,6 +131,8 @@ class MyScene extends CGFscene {
             this.lights[1].update();
             this.lights[2].disable();
             this.lights[2].update();
+            this.lights[3].disable();
+            this.lights[3].update();
         }
         else {
             this.lights[0].disable();
@@ -129,6 +141,8 @@ class MyScene extends CGFscene {
             this.lights[1].update();
             this.lights[2].enable();
             this.lights[2].update();
+            this.lights[3].enable();
+            this.lights[3].update();
         }
     }
 
@@ -346,7 +360,7 @@ class MyScene extends CGFscene {
         
         // display treeGroup1
         this.pushMatrix();
-        this.translate(0, 0, -15);
+        this.translate(-7, 0, 18);
         this.rotate(Math.PI/4, 0, 1, 0);
         this.scale(1.5, 2, 1.5);
         this.treeGroup1.display();
@@ -354,7 +368,7 @@ class MyScene extends CGFscene {
 
         // display treeGroup2
         this.pushMatrix();
-        this.translate(7, 0, -8);
+        this.translate(-22, 0, 12);
         this.rotate(Math.PI/4, 0, 1, 0);
         this.scale(1.5, 2, 1.5);
         this.treeGroup2.display();
@@ -362,8 +376,8 @@ class MyScene extends CGFscene {
 
         // display treeRow1
         this.pushMatrix();
-        this.translate(-10, 0, -5);
-        this.rotate(-Math.PI/2.5, 0, 1, 0);
+        this.translate(-10, 0, 22);
+        this.rotate(0.9 * Math.PI, 0, 1, 0);
         this.scale(1.5, 2, 1.5);
         this.treeRow1.display();
         this.popMatrix();
@@ -378,9 +392,15 @@ class MyScene extends CGFscene {
         
         // display the lantern
         this.pushMatrix();
-        this.translate(10, 0, -3);
+        this.translate(-12, 0, 17);
         this.scale(0.5, 0.5, 0.5);
         this.lantern.display();
+        this.popMatrix();
+
+        // display pool
+        this.pushMatrix();
+        this.translate(15, 0, -15);
+        this.pool.display();
         this.popMatrix();
 
         // ---- END Primitive drawing section
