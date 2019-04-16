@@ -33,10 +33,10 @@ class MyScene extends CGFscene {
         this.smallHill = new MyVoxelHill(this, 3, this.grassTop, this.grassSide, this.grassBottom);
         this.bigHill = new MyVoxelHill(this, 5, this.grassTop, this.grassSide, this.grassBottom);
 
-        this.treeGroup1 = new MyTreeGroupPatch(this, this.trunkT, this.topT);
-        this.treeGroup2 = new MyTreeGroupPatch(this, this.trunkT, this.topT);
-        this.treeRow1 = new MyTreeRowPatch(this, this.trunkT, this.topT);
-        this.treeRow2 = new MyTreeRowPatch(this, this.trunkT, this.topT);
+        this.treeGroup1 = new MyTreeGroupPatch(this, this.diffuse2, this.topT);
+        this.treeGroup2 = new MyTreeGroupPatch(this, this.diffuse2, this.topT);
+        this.treeRow1 = new MyTreeRowPatch(this, this.diffuse2, this.topT);
+        this.treeRow2 = new MyTreeRowPatch(this, this.diffuse2, this.topT);
 
         this.pool = new MyPool(this, 7, 5, this.diffuse1, this.diffuse1, this.diffuse1, this.specular);
 
@@ -155,7 +155,9 @@ class MyScene extends CGFscene {
         this.specular.setDiffuse(water[0]/3.0, water[1]/3.0, water[2]/3.0, 1.0);
         this.specular.setSpecular(water[0], water[1], water[2], 1.0);
         this.specular.setShininess(10.0);
-        // TODO : add texture
+        this.specular.loadTexture('images/waterT.jpg');
+        this.specular.setTextureWrap('REPEAT', 'REPEAT');
+    
   
         // Diffuse material 1 (STONE)
         let stone= this.hexToRgbA("#95948b");
@@ -164,7 +166,9 @@ class MyScene extends CGFscene {
         this.diffuse1.setDiffuse(stone[0], stone[1], stone[2], 1.0);
         this.diffuse1.setSpecular(stone[0]/3.0, stone[1]/3.0, stone[2]/3.0, 1.0);
         this.diffuse1.setShininess(10.0);
-        //TODO : add texture
+        this.diffuse1.loadTexture('images/stoneT.jpg');
+        this.diffuse1.setTextureWrap('REPEAT', 'REPEAT');
+        
   
         // Diffuse material 2 (WOOD)
         let wood=this.hexToRgbA("#b69b4c");
@@ -173,6 +177,9 @@ class MyScene extends CGFscene {
         this.diffuse2.setDiffuse(wood[0], wood[1], wood[2], 1.0);
         this.diffuse2.setSpecular(wood[0]/3.0, wood[1]/3.0, wood[2]/3.0, 1.0);
         this.diffuse2.setShininess(10.0);
+        this.diffuse2.loadTexture('images/tree/mineTrunk.jpg');
+        this.diffuse2.setTextureWrap('REPEAT', 'REPEAT');
+
         //TODO : add texture
         
         // grass cube side texture
