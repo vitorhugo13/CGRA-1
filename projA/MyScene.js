@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -26,18 +27,16 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         
         this.ground = new MyQuad(this, 50, 50);
-        this.lantern = new MyLantern(this);
-        this.house = new MyHouse(this);
+        this.lantern = new MyLantern(this, this.yellow, this.green);
+        this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         
-        this.smallHill = new MyVoxelHill(this, 3);
-        this.bigHill = new MyVoxelHill(this, 5);
+        this.smallHill = new MyVoxelHill(this, 3, this.grassTop, this.grassSide, this.grassBottom);
+        this.bigHill = new MyVoxelHill(this, 5, this.grassTop, this.grassSide, this.grassBottom);
 
-        this.treeGroup1 = new MyTreeGroupPatch(this);
-        this.treeGroup2 = new MyTreeGroupPatch(this);
-        this.treeRow1 = new MyTreeRowPatch(this);
-        this.treeRow2 = new MyTreeRowPatch(this);
-
-        
+        this.treeGroup1 = new MyTreeGroupPatch(this, this.trunkT, this.topT);
+        this.treeGroup2 = new MyTreeGroupPatch(this, this.trunkT, this.topT);
+        this.treeRow1 = new MyTreeRowPatch(this, this.trunkT, this.topT);
+        this.treeRow2 = new MyTreeRowPatch(this, this.trunkT, this.topT);
 
         //Objects connected to MyInterface
         this.displayAxis = false;
@@ -45,38 +44,11 @@ class MyScene extends CGFscene {
         this.timeID = { 'Day' : 0, 'Night' : 1 };
         this.selectedTime = 0
 
-        //Materials
-        //testes
-        this.groundTexture = new CGFappearance(this);
-        this.groundTexture.setAmbient(0.1, 0.1, 0.1, 1);
-        this.groundTexture.setDiffuse(1, 1, 1, 1);
-        this.groundTexture.setSpecular(0.1, 0.1, 0.1, 1);
-        this.groundTexture.setShininess(10.0);
-        this.groundTexture.loadTexture('images/mineTop.png');
-        this.groundTexture.setTextureWrap('REPEAT', 'REPEAT');
-
-        // day-time skybox texture
-        this.day = new CGFappearance(this);
-        this.day.setAmbient(0.1, 0.1, 0.1, 1);
-        this.day.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.day.setSpecular(0.1, 0.1, 0.1, 1);
-        this.day.setShininess(10.0);
-        this.day.loadTexture('images/CubeMap.png');
-        this.day.setTextureWrap('REPEAT', 'REPEAT');
-
-        // night-time skybox texture
-        this.night = new CGFappearance(this);
-        this.night.setAmbient(0.1, 0.1, 0.1, 1);
-        this.night.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.night.setSpecular(0.1, 0.1, 0.1, 1);
-        this.night.setShininess(10.0);
-        this.night.loadTexture('images/night.jpg');
-        this.night.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     initLights() {
 
-        this.globalAmbientLight = 0.1;
+        this.globalAmbientLight = 0.5;
         this.setGlobalAmbientLight(this.globalAmbientLight,this.globalAmbientLight,this.globalAmbientLight,1.0);
 
         // sun
@@ -91,9 +63,9 @@ class MyScene extends CGFscene {
         // moon
         let moon = this.hexToRgbA("#ccffff");
         this.lights[1].setPosition(24, 24, -24, 1);        // TODO : change position to match skybox
-        this.lights[1].setDiffuse(moon[0]/1.1, moon[1]/1.1, moon[2]/1.1, 1.0);  // TODO : change color
-        this.lights[1].setSpecular(moon[0]/1.1, moon[1]/1.1, moon[2]/1.1, 1);         // TODO : change color
-        this.lights[1].setConstantAttenuation(1.5);    
+        this.lights[1].setDiffuse(moon[0], moon[1], moon[2], 1.0);  // TODO : change color
+        this.lights[1].setSpecular(moon[0], moon[1], moon[2], 1);         // TODO : change color
+        this.lights[1].setConstantAttenuation(1.3);    
         this.lights[1].disable();
         this.lights[1].update();
 
@@ -160,6 +132,157 @@ class MyScene extends CGFscene {
         }
     }
 
+    initMaterials() {
+
+        // Specular material (WATER)
+        let water = this.hexToRgbA("#40a4df");
+        this.specular = new CGFappearance(this);
+        this.specular.setAmbient(water[0], water[1], water[2], 1.0);
+        this.specular.setDiffuse(water[0]/3.0, water[1]/3.0, water[2]/3.0, 1.0);
+        this.specular.setSpecular(water[0], water[1], water[2], 1.0);
+        this.specular.setShininess(10.0);
+        // TODO : add texture
+  
+        // Diffuse material 1 (STONE)
+        let stone= this.hexToRgbA("#95948b");
+        this.diffuse1 = new CGFappearance(this);
+        this.diffuse1.setAmbient(stone[0], stone[1], stone[2], 1.0);
+        this.diffuse1.setDiffuse(stone[0], stone[1], stone[2], 1.0);
+        this.diffuse1.setSpecular(stone[0]/3.0, stone[1]/3.0, stone[2]/3.0, 1.0);
+        this.diffuse1.setShininess(10.0);
+        //TODO : add texture
+  
+        // Diffuse material 2 (WOOD)
+        let wood=this.hexToRgbA("#b69b4c");
+        this.diffuse2 = new CGFappearance(this);
+        this.diffuse2.setAmbient(wood[0], wood[1], wood[2], 1.0);
+        this.diffuse2.setDiffuse(wood[0], wood[1], wood[2], 1.0);
+        this.diffuse2.setSpecular(wood[0]/3.0, wood[1]/3.0, wood[2]/3.0, 1.0);
+        this.diffuse2.setShininess(10.0);
+        //TODO : add texture
+        
+        // grass cube side texture
+        this.grassSide = new CGFappearance(this);
+        this.grassSide.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassSide.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassSide.setShininess(10.0);
+        this.grassSide.loadTexture('images/hill/grassSide.png');
+        this.grassSide.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // grass cube top texture
+        this.grassTop = new CGFappearance(this);
+        this.grassTop.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassTop.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassTop.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassTop.setShininess(10.0);
+        this.grassTop.loadTexture('images/hill/grassTop.png');
+        this.grassTop.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // grass cube bottom texture
+        this.grassBottom = new CGFappearance(this);
+        this.grassBottom.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassBottom.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassBottom.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassBottom.setShininess(10.0);
+        this.grassBottom.loadTexture('images/hill/grassBottom.png');
+		this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
+
+        // day-time skybox texture
+        this.day = new CGFappearance(this);
+        this.day.setAmbient(0.1, 0.1, 0.1, 1);
+        this.day.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.day.setSpecular(0.1, 0.1, 0.1, 1);
+        this.day.setEmission(1, 1, 1, 1);
+        this.day.setShininess(10.0);
+        this.day.loadTexture('images/skybox/day.png');
+        this.day.setTextureWrap('REPEAT', 'REPEAT');
+
+        // night-time skybox texture
+        this.night = new CGFappearance(this);
+        this.night.setAmbient(0.1, 0.1, 0.1, 1);
+        this.night.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.night.setSpecular(0.1, 0.1, 0.1, 1);
+        this.night.setEmission(1, 1, 1, 1);
+        this.night.setShininess(10.0);
+        this.night.loadTexture('images/skybox/night.jpg');
+        this.night.setTextureWrap('REPEAT', 'REPEAT');
+        
+        /*
+        this.exemplo = new CGFappearance(this);
+        this.exemplo.setAmbient(0.1, 0.1, 0.1, 1);
+        this.exemplo.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.exemplo.setSpecular(0.1, 0.1, 0.1, 1);
+        this.exemplo.setShininess(10.0);
+        this.exemplo.loadTexture('textures/test.jpg');
+        this.exemplo.setTextureWrap('REPEAT', 'REPEAT');
+        */
+
+        //yellow texture for lantern
+        this.yellow = new CGFappearance(this);
+        this.yellow.setAmbient(0.1, 0.1, 0.1, 1);
+        this.yellow.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
+        this.yellow.setShininess(10.0);
+        this.yellow.loadTexture('images/lantern/yellow.jpg');
+        this.yellow.setTextureWrap('REPEAT', 'REPEAT');
+
+        //green texture for lantern
+        this.green = new CGFappearance(this);
+        this.green.setAmbient(0.1, 0.1, 0.1, 1);
+        this.green.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.green.setSpecular(0.1, 0.1, 0.1, 1);
+        this.green.setShininess(10.0);
+        this.green.loadTexture('images/lantern/green.jpg');
+        this.green.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house roof texture
+        this.rooft = new CGFappearance(this);
+        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rooft.setShininess(10.0);
+        this.rooft.loadTexture('images/house/roof.jpg');
+        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house texture
+        this.houset = new CGFappearance(this);
+        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
+        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houset.setShininess(10.0);
+        this.houset.loadTexture('images/house/wall.jpg');
+        this.houset.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house pillar texture
+        this.pillart = new CGFappearance(this);
+        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillart.setShininess(10.0);
+        this.pillart.loadTexture('images/house/pillar.jpg');
+        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
+
+        //tree top
+        this.topT = new CGFappearance(this);
+        this.topT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.topT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.topT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.topT.setShininess(10.0);
+        this.topT.loadTexture('images/tree/treeTop.jpg');
+        this.topT.setTextureWrap('REPEAT', 'REPEAT');
+        
+        //tree trunk
+        this.trunkT = new CGFappearance(this);
+        this.trunkT.setAmbient(0.1, 0.1, 0.1, 1);
+        this.trunkT.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.trunkT.setSpecular(0.1, 0.1, 0.1, 1);
+        this.trunkT.setShininess(10.0);
+        this.trunkT.loadTexture('images/tree/mineTrunk.jpg');
+        this.trunkT.setTextureWrap('REPEAT', 'REPEAT');
+
+    }
+
     display() {
         this.enableTextures(this.displayTextures);  
 
@@ -199,7 +322,7 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-Math.PI/2, 1, 0, 0);
         this.scale(50, 50, 1);
-        this.groundTexture.apply();
+        this.grassTop.apply();
         this.ground.display();
         this.popMatrix();
 
@@ -208,7 +331,7 @@ class MyScene extends CGFscene {
         this.scale(2,2,2);
         this.house.display();
         this.popMatrix();
-
+        
         // display small hill
         this.pushMatrix();
         this.translate(15, 0, 0);
@@ -220,7 +343,7 @@ class MyScene extends CGFscene {
         this.translate(-15, 0, -20);
         this.bigHill.display();
         this.popMatrix();
-
+        
         // display treeGroup1
         this.pushMatrix();
         this.translate(0, 0, -15);
@@ -259,7 +382,6 @@ class MyScene extends CGFscene {
         this.scale(0.5, 0.5, 0.5);
         this.lantern.display();
         this.popMatrix();
-            
 
         // ---- END Primitive drawing section
     }
