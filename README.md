@@ -14,6 +14,7 @@ All code developed for the TP classes of the CGRA course
 * [**TP04**](#tp04---texture) - Textures
 * [**Project A**](#project-a) - *Application of the above*
 * [**TP05**](#tp05---shaders) - Shaders
+* [**TP06**](#tp06---procedural-modeling) - Procedural Modeling
 
 #### TP01 - Setup and GUI
 * **Specification** : [Portuguese](specifications/tp01.pdf)
@@ -33,3 +34,5 @@ All code developed for the TP classes of the CGRA course
 #### TP05 - Shaders
 * **Specification** : [Portuguese](specifications/tp05.pdf)
 
+#### TP06 - Procedural Modeling
+* **Specification** : [Portuguese](specifications/tp06.pdf)
