@@ -3,12 +3,11 @@
  * 
  */
 class MyQuad extends CGFobject {
-	constructor(scene, s, t) {
+	constructor(scene) {
 		super(scene);
 		this.initBuffers();
 
-		if (s != undefined && t != undefined)
-			this.updateTexCoords(s, t);
+		//deleted s and t from arguments in the constructor
 	}
 	
 	initBuffers() {
