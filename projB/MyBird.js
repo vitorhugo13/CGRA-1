@@ -24,11 +24,11 @@ class MyBird extends CGFobject {
         this.nose  = new MyPyramid(this.scene,10);
         this.wing3 = new MyTriangle(this.scene);
         this.wing4 = new MyTriangle(this.scene);
-        this.eye1  = new MyUnitCubeQuad(this.scene,this.bodyT,this.bodyT,this.bodyT);
-        this.eye2  = new MyUnitCubeQuad(this.scene,this.bodyT,this.bodyT,this.bodyT);
+        this.eye1  = new MyUnitCubeQuad(this.scene,this.eyesT,this.eyesT,this.eyesT);
+        this.eye2  = new MyUnitCubeQuad(this.scene,this.eyesT,this.eyesT,this.eyesT);
         this.tail  = new MyTriangle(this.scene);
 
-    }
+    } 
 
     display(){
 
@@ -47,6 +47,7 @@ class MyBird extends CGFobject {
         this.scene.translate(0,1.35,0.85);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.rotate(Math.PI/2,1,0,0);
+        this.noseT.apply();
         this.nose.display();
         this.scene.popMatrix();
 
@@ -55,6 +56,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI/6,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.scene.scale(1,0.5,0);
+        this.bodyT.apply();
         this.wing1.display();
         this.scene.popMatrix();
 
@@ -63,6 +65,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(-Math.PI/6,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.scene.scale(1,0.5,0);
+        this.bodyT.apply();
         this.wing2.display();
         this.scene.popMatrix();
 
@@ -86,6 +89,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(-Math.PI/6,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.scene.scale(0.5,0.25,0);
+        this.bodyT.apply();
         this.wing3.display();
         this.scene.popMatrix();
 
@@ -96,6 +100,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.scene.scale(0.5,0.25,0);
+        this.bodyT.apply();
         this.wing4.display();
         this.scene.popMatrix();
 
@@ -105,6 +110,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI/2,0,1,0);
         this.scene.rotate(Math.PI/2,0,0,1);
         this.scene.scale(0.5,0.5,0.5);
+        this.noseT.apply();
         this.tail.display();
         this.scene.popMatrix();
     
