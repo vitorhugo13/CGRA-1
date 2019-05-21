@@ -23,6 +23,8 @@ class MyBird extends CGFobject {
         this.nose= new MyPyramid(this.scene,10);
         this.wing3= new MyTriangle(this.scene);
         this.wing4= new MyTriangle(this.scene);
+        this.eye1=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.eye2=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
 
     }
 
@@ -58,8 +60,20 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
 
 
-        //this part will be used to the second part of the wing
-    /*
+        this.scene.pushMatrix();
+        this.scene.translate(-0.35,1.3,0.55);
+        this.scene.scale(0.2,0.2,0.2);
+        this.eye1.display();
+        this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.35,1.3,0.55);
+        this.scene.scale(0.2,0.2,0.2);
+        this.eye2.display();
+        this.scene.popMatrix();
+/*
+    
         this.scene.pushMatrix();
         this.scene.translate(0.5,0.5,0);
         this.scene.rotate(Math.PI/2,1,0,0);
@@ -71,7 +85,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI/2,1,0,0);
         this.wing2.display();
         this.scene.popMatrix();
-*/
+    */
     }
 
     enableNormalViz() {
@@ -80,15 +94,19 @@ class MyBird extends CGFobject {
         this.wing1.enableNormalViz();
         this.wing2.enableNormalViz();
         this.nose.enableNormalViz();
+        this.eye1.enableNormalViz();
+        this.eye2.enableNormalViz();
         
     }
 
     disableNormalViz() {
         this.head.disableNormalViz();
         this.body.disableNormalViz();
-        this.wing1.enableNormalViz();
-        this.wing2.enableNormalViz();
-        this.nose.enableNormalViz();
+        this.wing1.disableNormalViz();
+        this.wing2.disableNormalViz();
+        this.nose.disableNormalViz();
+        this.eye1.disableNormalViz();
+        this.eye2.disableNormalViz();
         
     }
 }
