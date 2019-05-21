@@ -20,6 +20,7 @@ class MyTriangle extends CGFobject {
 		   this is how we indicate the front of the figure */
 		this.indices = [
             0, 1, 2,
+            2,1,0
 		];
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
