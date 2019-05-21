@@ -7,6 +7,7 @@ class MyBird extends CGFobject {
 
     constructor(scene,topT,sideT,bottomT) {
         super(scene);
+
         this.topT=topT;
         this.sideT=sideT;
         this.bottomT=bottomT;
@@ -16,20 +17,22 @@ class MyBird extends CGFobject {
 
     initBuffers() {
 
-        this.head=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
-        this.body=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
-        this.wing1=new MyQuad(this.scene);
-        this.wing2=new MyQuad(this.scene);
-        this.nose= new MyPyramid(this.scene,10);
-        this.wing3= new MyTriangle(this.scene);
-        this.wing4= new MyTriangle(this.scene);
-        this.eye1=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
-        this.eye2=new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.head  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.body  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.wing1 = new MyQuad(this.scene);
+        this.wing2 = new MyQuad(this.scene);
+        this.nose  = new MyPyramid(this.scene,10);
+        this.wing3 = new MyTriangle(this.scene);
+        this.wing4 = new MyTriangle(this.scene);
+        this.eye1  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.eye2  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.tail  = new MyTriangle(this.scene);
 
     }
 
     display(){
 
+    
         this.scene.pushMatrix();
         this.body.display();
         this.scene.popMatrix();
@@ -62,7 +65,7 @@ class MyBird extends CGFobject {
         this.scene.scale(1,0.65,0);
         this.wing2.display();
         this.scene.popMatrix();
-/*
+
 
         this.scene.pushMatrix();
         this.scene.translate(-0.35,1.3,0.55);
@@ -76,22 +79,34 @@ class MyBird extends CGFobject {
         this.scene.scale(0.2,0.2,0.2);
         this.eye2.display();
         this.scene.popMatrix();
-        */
 
 
-/*
         this.scene.pushMatrix();
-        this.scene.translate(1.5,0.5,0);
-       // this.scene.rotate(Math.PI/2,1,0,0);
+        this.scene.translate(1.5,0.5,0.085);
+        this.scene.rotate(-Math.PI/6,0,0,1);
+        this.scene.rotate(Math.PI/2,1,0,0);
+        this.scene.scale(0.5,0.25,0);
         this.wing3.display();
         this.scene.popMatrix();
 
+
+        this.scene.pushMatrix();
+        this.scene.translate(-1.5,0.5,0.085);
+        this.scene.rotate(Math.PI/6,0,0,1);
+        this.scene.rotate(Math.PI,0,0,1);
+        this.scene.rotate(Math.PI/2,1,0,0);
+        this.scene.scale(0.5,0.25,0);
+        this.wing4.display();
+        this.scene.popMatrix();
+
+    /*
         this.scene.pushMatrix();
         this.scene.translate(-1.5,0.5,0);
         //this.scene.rotate(Math.PI/2,1,0,0);
-        this.wing4.display();
+        this.tail.display();
         this.scene.popMatrix();
     */
+
     }
 
     enableNormalViz() {
@@ -102,6 +117,8 @@ class MyBird extends CGFobject {
         this.nose.enableNormalViz();
         this.eye1.enableNormalViz();
         this.eye2.enableNormalViz();
+        this.wing3.enableNormalViz();
+        this.wing4.enableNormalViz();
         
     }
 
@@ -113,6 +130,8 @@ class MyBird extends CGFobject {
         this.nose.disableNormalViz();
         this.eye1.disableNormalViz();
         this.eye2.disableNormalViz();
+        this.wing3.disableNormalViz();
+        this.wing4.disableNormalViz();
         
     }
 }
