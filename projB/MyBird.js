@@ -5,27 +5,27 @@
  */
 class MyBird extends CGFobject {
 
-    constructor(scene,topT,sideT,bottomT) {
+    constructor(scene,body,eyes,nose) {
         super(scene);
 
-        this.topT=topT;
-        this.sideT=sideT;
-        this.bottomT=bottomT;
+        this.body=body;
+        this.eyes=eyes;
+        this.nose=nose;
 
         this.initBuffers();
     }
 
     initBuffers() {
 
-        this.head  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
-        this.body  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.head  = new MyUnitCubeQuad(this.scene,this.body,this.body,this.body);
+        this.body  = new MyUnitCubeQuad(this.scene,this.body,this.body,this.body);
         this.wing1 = new MyQuad(this.scene);
         this.wing2 = new MyQuad(this.scene);
         this.nose  = new MyPyramid(this.scene,10);
         this.wing3 = new MyTriangle(this.scene);
         this.wing4 = new MyTriangle(this.scene);
-        this.eye1  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
-        this.eye2  = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.bottomT);
+        this.eye1  = new MyUnitCubeQuad(this.scene,this.body,this.body,this.body);
+        this.eye2  = new MyUnitCubeQuad(this.scene,this.body,this.body,this.body);
         this.tail  = new MyTriangle(this.scene);
 
     }

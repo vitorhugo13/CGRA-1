@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
 
         //Objects connected to MyInterface
-        this.bird=new MyBird(this,this.grassTop, this.grassSide, this.grassBottom);
+        this.bird=new MyBird(this,this.body, this.eyes, this.nose);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -74,7 +74,34 @@ class MyScene extends CGFscene {
         this.grassBottom.setSpecular(0.1, 0.1, 0.1, 1);
         this.grassBottom.setShininess(10.0);
         this.grassBottom.loadTexture('images/hill/grassBottom.png');
-		this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
+        this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // body of bird texture
+        this.body = new CGFappearance(this);
+        this.body.setAmbient(0.1, 0.1, 0.1, 1);
+        this.body.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.body.setSpecular(0.1, 0.1, 0.1, 1);
+        this.body.setShininess(10.0);
+        this.body.loadTexture('textures/bird/body.png');
+        this.body.setTextureWrap('REPEAT', 'REPEAT');
+
+        // eyes of bird texture
+        this.eyes = new CGFappearance(this);
+        this.eyes.setAmbient(0.1, 0.1, 0.1, 1);
+        this.eyes.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.eyes.setSpecular(0.1, 0.1, 0.1, 1);
+        this.eyes.setShininess(10.0);
+        this.eyes.loadTexture('textures/bird/eyes.jpg');
+        this.eyes.setTextureWrap('REPEAT', 'REPEAT');
+
+        // nose of bird texture
+        this.nose = new CGFappearance(this);
+        this.nose.setAmbient(0.1, 0.1, 0.1, 1);
+        this.nose.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.nose.setSpecular(0.1, 0.1, 0.1, 1);
+        this.nose.setShininess(10.0);
+        this.nose.loadTexture('textures/bird/nose.jpg');
+        this.nose.setTextureWrap('REPEAT', 'REPEAT');
 
     }
 
@@ -103,10 +130,10 @@ class MyScene extends CGFscene {
         this.popMatrix();
         // ---- END Primitive drawing section
 
-        //this.pushMatrix();
-        //this.translate(0,0,0);
+        this.pushMatrix();
+        this.translate(0,3,0);
         this.bird.display();
-        //this.popMatrix();
+        this.popMatrix();
        
     }
 }
