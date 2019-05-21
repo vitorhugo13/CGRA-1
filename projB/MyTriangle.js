@@ -16,9 +16,9 @@ class MyTriangle extends CGFobject {
 			 1, -1, 0,	//1
 			-1,  1, 0,	//2
 
-			-1, -1, 0,	//0
-			 1, -1, 0,	//1
-			-1,  1, 0	//2
+			-1, -1, 0,	//3
+			 1, -1, 0,	//4
+			-1,  1, 0	//5
 		];
 
 		this.normals = [
@@ -37,8 +37,8 @@ class MyTriangle extends CGFobject {
 			0, 1, 2,
 			2, 1, 0,
 
-			0, 1, 2,
-			2, 1, 0
+			3,4,5,
+			5,4,3
 		];
 
 		this.texCoords = [

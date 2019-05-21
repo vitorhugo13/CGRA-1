@@ -88,7 +88,7 @@ class MyBird extends CGFobject {
         this.scene.translate(1.5,0.5,0.085);
         this.scene.rotate(-Math.PI/6,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
-        this.scene.scale(0.5,0.25,0);
+        this.scene.scale(0.5,0.25,1);
         this.bodyT.apply();
         this.wing3.display();
         this.scene.popMatrix();
@@ -99,7 +99,7 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI/6,0,0,1);
         this.scene.rotate(Math.PI,0,0,1);
         this.scene.rotate(Math.PI/2,1,0,0);
-        this.scene.scale(0.5,0.25,0);
+        this.scene.scale(0.5,0.25,1);
         this.bodyT.apply();
         this.wing4.display();
         this.scene.popMatrix();
