@@ -6,7 +6,6 @@ uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
-uniform float timeFactor;
 varying vec2 vTextureCoord;
 
 uniform sampler2D terrainMap;
@@ -14,11 +13,12 @@ uniform sampler2D terrainMap;
 
 void main() {
 
-	vec4 color = texture2D(terrainMap, aTextureCoord + vec2(timeFactor * 0.003, timeFactor * 0.015)); 
+    vec3 info = vec3(aVertexPosition);
+    float cor = texture2D(terrainMap,vTextureCoord).r;
+    vec3 i = vec3(0,0,cor);
+    info += i;
+    vec4 color = vec4(info , 1.0); 
 
-	float z = 0.06 * ((color.g + color.r + color.b) / 3.5) + 0.03 * sin(0.01 * timeFactor + aTextureCoord[0] + aTextureCoord[1]);
-
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + vec3(0, 0, z), 1.0);
-
+	gl_Position = uPMatrix * uMVMatrix * color;
 	vTextureCoord = aTextureCoord;
 }
