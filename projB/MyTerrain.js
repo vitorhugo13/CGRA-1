@@ -34,9 +34,11 @@ class MyTerrain extends CGFobject{
         this.terrainMap.bind(1);
         this.terrainAltimetry.bind(2);
         this.scene.setActiveShaders(this.terrainShader);
-        //don't know if transformation are needed;
-        
+        this.pushMatrix();
+        this.rotate(-0.5*Math.PI, 1, 0, 0);
+        this.scale(60, 60, 1);
         this.plane.display();
+        this.popMatrix();
 
         this.scene.setActiveShaders(this.defaultShader);
     }
