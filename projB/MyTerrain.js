@@ -13,9 +13,10 @@ class MyTerrain extends CGFobject{
     }
     
     initBuffers(){
-        this.plane = new Plane(this,32);
-
-      
+        this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+        this.scene.plane = new Plane(this,32); 
+        this.terrainShader.setUniformsValues({terrainMap: 1, terrainAltimetry: 2});
+        //this.terrainShader.setUniformsValues({uSampler2: 1, uSampler3: 2});
     }
 
     initMaterials(){
@@ -23,10 +24,19 @@ class MyTerrain extends CGFobject{
         this.terrainMap = new CGFtexture(this.scene, "images/heightmap.jpg");
         this.terrainAltimetry = new CGFtexture(this.scene, "images/altimetry.png");
         
-        this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+
+       
     }
 
     display(){
-        plane.display();
+        
+        this.terrainMap.bind(1);
+        this.terrainAltimetry.bind(2);
+        this.scene.setActiveShaders(this.terrainShader);
+        //don't know if transformation are needed;
+        this.terrainShader.apply();
+        this.plane.display();
+
+        this.scene.setActiveShaders(this.defaultShader);
     }
 }
