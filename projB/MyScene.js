@@ -10,6 +10,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -24,8 +25,10 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
+        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -36,14 +39,53 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
+    initMaterials() {
+        this.yellow = new CGFappearance(this);
+        this.yellow.setAmbient(0.1, 0.1, 0.1, 1);
+        this.yellow.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
+        this.yellow.setShininess(10.0);
+        /*this.yellow.loadTexture('images/lantern/yellow.jpg');
+        this.yellow.setTextureWrap('REPEAT', 'REPEAT');*/
+    }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+        // Check for key codes e.g. in ​https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            keysPressed = true;
+            this.bird.accelerate(1);
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            keysPressed = true;
+            this.bird.accelerate(-1);
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
+            keysPressed = true;
+            this.bird.turn(Math.PI / 6);
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
+            keysPressed = true;
+            this.bird.turn(- Math.PI / 6);            
+        }
 
+        if (keysPressed) {
+            console.log(text);
+        }  
+    }
+    update(t){
+        this.checkKeys();
+        this.bird.update(t);
     }
 
     display() {
@@ -69,6 +111,8 @@ class MyScene extends CGFscene {
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
+
+        this.bird.display();
         // ---- END Primitive drawing section
     }
 }
