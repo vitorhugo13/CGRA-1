@@ -11,11 +11,8 @@ uniform sampler2D terrainAltimetry;
 
 void main() {
 
-	vec4 color = texture2D(terrainTex, vTextureCoord);
-    float height = texture2D(terrainAltimetry, vTextureCoord).r;
-    
-    vec2 new_coords = vec2(0,-height);
+	vec4 color = texture2D(terrainMap, vTextureCoord);
+    vec4 new_colour = texture2D(terrainAltimetry, vec2(0,-color.r));
 
-
-	gl_FragColor = color;
+	gl_FragColor = new_colour;
 }

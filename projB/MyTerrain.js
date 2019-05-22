@@ -7,8 +7,10 @@ class MyTerrain extends CGFobject{
 
     constructor(scene) {
 
-		super(scene);
+        super(scene);
+        this.initMaterials();
         this.initBuffers();
+        
         
     }
     
@@ -23,9 +25,6 @@ class MyTerrain extends CGFobject{
         this.terrainTex = new CGFtexture(this.scene, "images/terrain.jpg");
         this.terrainMap = new CGFtexture(this.scene, "images/heightmap.jpg");
         this.terrainAltimetry = new CGFtexture(this.scene, "images/altimetry.png");
-        
-
-       
     }
 
     display(){
@@ -33,13 +32,13 @@ class MyTerrain extends CGFobject{
         this.terrainTex.bind(0);
         this.terrainMap.bind(1);
         this.terrainAltimetry.bind(2);
-        this.scene.setActiveShaders(this.terrainShader);
-        this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
+        this.scene.setActiveShader(this.terrainShader);
+        this.scene.pushMatrix();
+        this.scene.rotate(-0.5*Math.PI, 1, 0, 0);
+        this.scene.scale(60, 60, 1);
         this.plane.display();
-        this.popMatrix();
+        this.scene.popMatrix();
 
-        this.scene.setActiveShaders(this.defaultShader);
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
