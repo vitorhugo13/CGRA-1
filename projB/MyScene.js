@@ -28,7 +28,8 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.bird=new MyBird(this,this.body, this.eyes, this.nose);
-        this.terrain = new MyTerrain(this);  
+        this.terrain = new MyTerrain(this);
+        this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -50,6 +51,8 @@ class MyScene extends CGFscene {
     }
 
     initMaterials(){
+
+        /*
         // grass cube side texture
         this.grassSide = new CGFappearance(this);
         this.grassSide.setAmbient(0.1, 0.1, 0.1, 1);
@@ -76,6 +79,8 @@ class MyScene extends CGFscene {
         this.grassBottom.setShininess(10.0);
         this.grassBottom.loadTexture('images/hill/grassBottom.png');
         this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
+
+        */
         
         // body of bird texture
         this.body = new CGFappearance(this);
@@ -104,6 +109,87 @@ class MyScene extends CGFscene {
         this.nose.loadTexture('textures/bird/nose.jpg');
         this.nose.setTextureWrap('REPEAT', 'REPEAT');
 
+            //house roof texture
+        this.rooft = new CGFappearance(this);
+        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rooft.setShininess(10.0);
+        this.rooft.loadTexture('images/house/roof.jpg');
+        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house texture
+        this.houset = new CGFappearance(this);
+        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
+        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houset.setShininess(10.0);
+        this.houset.loadTexture('images/house/wall.jpg');
+        this.houset.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house pillar texture
+        this.pillart = new CGFappearance(this);
+        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillart.setShininess(10.0);
+        this.pillart.loadTexture('images/house/pillar.jpg');
+        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
+
+            //house roof texture
+        this.rooft = new CGFappearance(this);
+        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rooft.setShininess(10.0);
+        this.rooft.loadTexture('images/house/roof.jpg');
+        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house texture
+        this.houset = new CGFappearance(this);
+        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
+        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houset.setShininess(10.0);
+        this.houset.loadTexture('images/house/wall.jpg');
+        this.houset.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house pillar texture
+        this.pillart = new CGFappearance(this);
+        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillart.setShininess(10.0);
+        this.pillart.loadTexture('images/house/pillar.jpg');
+        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house roof texture
+        this.rooft = new CGFappearance(this);
+        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
+        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
+        this.rooft.setShininess(10.0);
+        this.rooft.loadTexture('images/house/roof.jpg');
+        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house texture
+        this.houset = new CGFappearance(this);
+        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
+        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
+        this.houset.setShininess(10.0);
+        this.houset.loadTexture('images/house/wall.jpg');
+        this.houset.setTextureWrap('REPEAT', 'REPEAT');
+
+        //house pillar texture
+        this.pillart = new CGFappearance(this);
+        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
+        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
+        this.pillart.setShininess(10.0);
+        this.pillart.loadTexture('images/house/pillar.jpg');
+        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
+
     }
 
     display() {
@@ -130,7 +216,13 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.translate(0,3,0);
+        this.scale(0.7,0.7,0.7);
         this.bird.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(4,2.7,-3);
+        this.house.display();
         this.popMatrix();
        
     }
