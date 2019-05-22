@@ -51,36 +51,6 @@ class MyScene extends CGFscene {
     }
 
     initMaterials(){
-
-        /*
-        // grass cube side texture
-        this.grassSide = new CGFappearance(this);
-        this.grassSide.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grassSide.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grassSide.setSpecular(0.1, 0.1, 0.1, 1);
-        this.grassSide.setShininess(10.0);
-        this.grassSide.loadTexture('images/hill/grassSide.png');
-        this.grassSide.setTextureWrap('REPEAT', 'REPEAT');
-        
-        // grass cube top texture
-        this.grassTop = new CGFappearance(this);
-        this.grassTop.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grassTop.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grassTop.setSpecular(0.1, 0.1, 0.1, 1);
-        this.grassTop.setShininess(10.0);
-        this.grassTop.loadTexture('images/hill/grassTop.png');
-        this.grassTop.setTextureWrap('REPEAT', 'REPEAT');
-        
-        // grass cube bottom texture
-        this.grassBottom = new CGFappearance(this);
-        this.grassBottom.setAmbient(0.1, 0.1, 0.1, 1);
-        this.grassBottom.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.grassBottom.setSpecular(0.1, 0.1, 0.1, 1);
-        this.grassBottom.setShininess(10.0);
-        this.grassBottom.loadTexture('images/hill/grassBottom.png');
-        this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
-
-        */
         
         // body of bird texture
         this.body = new CGFappearance(this);
