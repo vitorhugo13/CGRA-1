@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.bird=new MyBird(this,this.body, this.eyes, this.nose);
         this.terrain = new MyTerrain(this);
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
+        this.cubeMap = new MyCubeMap(this);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -51,7 +52,7 @@ class MyScene extends CGFscene {
     }
 
     initMaterials(){
-        
+
         // body of bird texture
         this.body = new CGFappearance(this);
         this.body.setAmbient(0.1, 0.1, 0.1, 1);
@@ -160,6 +161,15 @@ class MyScene extends CGFscene {
         this.pillart.loadTexture('images/house/pillar.jpg');
         this.pillart.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.day = new CGFappearance(this);
+        this.day.setAmbient(0.1, 0.1, 0.1, 1);
+        this.day.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.day.setSpecular(0.1, 0.1, 0.1, 1);
+        this.day.setEmission(1, 1, 1, 1);
+        this.day.setShininess(10.0);
+        this.day.loadTexture('images/day.png');
+        this.day.setTextureWrap('REPEAT', 'REPEAT');
+
     }
 
     display() {
@@ -183,6 +193,11 @@ class MyScene extends CGFscene {
         this.terrain.display();
         
         // ---- END Primitive drawing section
+
+        this.pushMatrix();
+        this.day.apply();
+        this.cubeMap.display();
+        this.popMatrix();
 
         this.pushMatrix();
         this.translate(0,3,0);
