@@ -9,7 +9,7 @@ uniform sampler2D terrainTex;
 
 void main() {
 
-	vec4 color = texture2D(waterTex, vTextureCoord + vec2(timeFactor * 0.003, timeFactor * 0.015));
+	vec4 color = texture2D(terrainTex, vTextureCoord + vec2(timeFactor * 0.003, timeFactor * 0.015)); 
 	
 	gl_FragColor = color;
 }
