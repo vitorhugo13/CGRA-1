@@ -29,6 +29,14 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.bird=new MyBird(this,this.body, this.eyes, this.nose);
         this.terrain = new MyTerrain(this);
+
+
+
+        //part 4 of the project
+        this.terrainTex = new CGFtexture(this, "images/terrain.jpg");
+        this.terrainMap = new CGFtexture(this, "images/heightmap.jpg");
+        
+        this.terrainShder = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
