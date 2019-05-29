@@ -10,7 +10,7 @@ class MyBird extends CGFobject {
 
         this.orientation = 0;
         this.speed = 0;
-        this.position = [0, 3, 0];
+        this.position = [0, 6, 0];
         this.wingAngle = 0;
 
         this.bodyT = body;
@@ -46,23 +46,33 @@ class MyBird extends CGFobject {
     reset() {
         this.orientation = 0;
         this.speed = 0;
-        this.position = [0, 3, 0];
+        this.position = [0, 6, 0];
     }
 
     update(time) {
         this.timeFactor = 200;
 
+        this.position[0] = this.position[0] + this.speed * Math.cos(-this.orientation);
+        this.position[2] = this.position[2] + this.speed * Math.sin(-this.orientation);
+
         switch (this.state) {
             case this.BirdState.NORMAL:
-                this.position[0] = this.position[0] + this.speed * Math.cos(-this.orientation);
-                this.position[2] = this.position[2] + this.speed * Math.sin(-this.orientation);
-    
                 this.verticalRange = 0.1;
                 this.position[1] = this.position[1] + Math.sin(time / this.timeFactor * this.speedFactor) * this.verticalRange;
                 break;
-            case this.BirdState.ASCENDING:
-                break;
             case this.BirdState.DESCENDING:
+                if (this.position[1] <= 2.9) {
+                    this.state = this.BirdState.ASCENDING;
+                    break;
+                }
+                this.position[1] -= 0.2;
+                break;
+            case this.BirdState.ASCENDING:
+                if (this.position[1] >= 6) {
+                    this.state = this.BirdState.NORMAL;
+                    break;
+                }
+                this.position[1] += 0.2;
                 break;
         }
 

@@ -26,11 +26,14 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         //this.plane = new Plane(this, 32);
 
-        //Objects connected to MyInterface
         this.bird=new MyBird(this,this.body, this.eyes, this.nose);
         this.terrain = new MyTerrain(this);
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
+
+        this.branches = {};
+        
+        //Objects connected to MyInterface
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -63,12 +66,12 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
             text += " W ";
             keysPressed = true;
-            this.bird.accelerate(1);
+            this.bird.accelerate(0.3);
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text += " S ";
             keysPressed = true;
-            this.bird.accelerate(-1);
+            this.bird.accelerate(-0.3);
         }
         if (this.gui.isKeyPressed("KeyA")) {
             text += " A ";
