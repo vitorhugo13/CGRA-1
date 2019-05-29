@@ -62,6 +62,7 @@ class ShaderScene extends CGFscene {
 		this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
 		this.waterMap = new CGFtexture(this, "textures/waterMap.jpg");
 
+			
 		// shaders initialization
 
 		this.testShaders = [

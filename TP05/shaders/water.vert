@@ -13,7 +13,7 @@ uniform sampler2D waterMap;
 
 void main() {
 
-	vec4 color = texture2D(waterMap, aTextureCoord + vec2(timeFactor * 0.003, timeFactor * 0.015));
+	vec4 color = texture2D(waterMap, aTextureCoord + vec2(timeFactor * 0.003, timeFactor * 0.015)); 
 
 	float z = 0.06 * ((color.g + color.r + color.b) / 3.5) + 0.03 * sin(0.01 * timeFactor + aTextureCoord[0] + aTextureCoord[1]);
 

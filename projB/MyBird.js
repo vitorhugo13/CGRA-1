@@ -22,7 +22,7 @@ class MyBird extends CGFobject {
             DESCENDING : 1,
             ASCENDING : 2,
         };
-        this.state = BirdState.NORMAL;
+        this.state = this.BirdState.NORMAL;
         
         // variables connected to MyInterface
         this.speedFactor = 1;
@@ -32,7 +32,7 @@ class MyBird extends CGFobject {
     }
 
     descend() {
-        this.state = BirdState.DESCENDING;
+        this.state = this.BirdState.DESCENDING;
     }
 
     turn(angle) {
@@ -53,16 +53,16 @@ class MyBird extends CGFobject {
         this.timeFactor = 200;
 
         switch (this.state) {
-            case BirdState.NORMAL:
+            case this.BirdState.NORMAL:
                 this.position[0] = this.position[0] + this.speed * Math.cos(-this.orientation);
                 this.position[2] = this.position[2] + this.speed * Math.sin(-this.orientation);
     
                 this.verticalRange = 0.1;
                 this.position[1] = this.position[1] + Math.sin(time / this.timeFactor * this.speedFactor) * this.verticalRange;
                 break;
-            case BirdState.ASCENDING:
+            case this.BirdState.ASCENDING:
                 break;
-            case BirdState.DESCENDING:
+            case this.BirdState.DESCENDING:
                 break;
         }
 
