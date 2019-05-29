@@ -41,14 +41,63 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
+    initMaterials() {
+        this.yellow = new CGFappearance(this);
+        this.yellow.setAmbient(0.1, 0.1, 0.1, 1);
+        this.yellow.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
+        this.yellow.setShininess(10.0);
+        /*this.yellow.loadTexture('images/lantern/yellow.jpg');
+        this.yellow.setTextureWrap('REPEAT', 'REPEAT');*/
+    }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+        // Check for key codes e.g. in ​https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            keysPressed = true;
+            this.bird.accelerate(1);
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            keysPressed = true;
+            this.bird.accelerate(-1);
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
+            keysPressed = true;
+            this.bird.turn(Math.PI / 10);
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
+            keysPressed = true;
+            this.bird.turn(- Math.PI / 10);            
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " R ";
+            keysPressed = true;
+            this.bird.reset();
+        }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text += " P ";
+            keysPressed = true;
+            this.bird.descend();
+        }
 
+        if (keysPressed) {
+            console.log(text);
+        }  
+    }
+    update(t){
+        this.checkKeys();
+        this.bird.update(t);
     }
 
     initMaterials(){
@@ -211,16 +260,19 @@ class MyScene extends CGFscene {
         this.terrain.display();
         
         // ---- END Primitive drawing section
+        /*
+        this.pushMatrix();
+        this.rotate(-0.5*Math.PI, 1, 0, 0);
+        this.scale(60, 60, 1);
+        this.plane.display();
+        this.popMatrix();
+        */
+
+        this.bird.display();
 
         this.pushMatrix();
         this.day.apply();
         this.cubeMap.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(0,3,0);
-        this.scale(0.7,0.7,0.7);
-        this.bird.display();
         this.popMatrix();
 
         this.pushMatrix();
