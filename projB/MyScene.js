@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
         this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, 0, this.stick, this.stickSide));
+        this.nest = new MyNest(this,this.stickSide);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
