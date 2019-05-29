@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this);
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
+        this.treeBranch = new MyTreeBranch(this,this.stick,this.stickSide);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -227,7 +228,7 @@ class MyScene extends CGFscene {
         this.stickSide.setDiffuse(0.9, 0.9, 0.9, 1);
         this.stickSide.setSpecular(0.1, 0.1, 0.1, 1);
         this.stickSide.setShininess(10.0);
-        this.stickSide.loadTexture('images/house/pillar.jpg');
+        this.stickSide.loadTexture('textures/branch/trunk.jpeg');
         this.stickSide.setTextureWrap('REPEAT', 'REPEAT');
 
         this.stick = new CGFappearance(this);
@@ -235,7 +236,7 @@ class MyScene extends CGFscene {
         this.stick.setDiffuse(0.9, 0.9, 0.9, 1);
         this.stick.setSpecular(0.1, 0.1, 0.1, 1);
         this.stick.setShininess(10.0);
-        this.stick.loadTexture('images/house/pillar.jpg');
+        this.stick.loadTexture('textures/branch/top.jpeg');
         this.stick.setTextureWrap('REPEAT', 'REPEAT');
     }
 
@@ -257,7 +258,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.terrain.display();
+       // this.terrain.display();
         
         // ---- END Primitive drawing section
         /*
@@ -268,17 +269,22 @@ class MyScene extends CGFscene {
         this.popMatrix();
         */
 
-        this.bird.display();
+        
+        this.treeBranch.display();
 
+       // this.bird.display();
+
+       
         this.pushMatrix();
         this.day.apply();
         this.cubeMap.display();
         this.popMatrix();
-
+        
+/*
         this.pushMatrix();
         this.translate(4,2.7,-3);
         this.house.display();
         this.popMatrix();
-       
+       */
     }
 }
