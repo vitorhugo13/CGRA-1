@@ -8,6 +8,7 @@ serialInclude(['../lib/CGF.js','MyScene.js', 'MyInterface.js', 'Plane.js',
                     'MyParallelogram.js','MyTerrain.js',
                     'MyHouse.js','MyCilinder.js',
                     'MyCubeMap.js', 'MyTreeBranch.js',
+                    'MyCilinderWTop.js', 'TopOfCilinder.js',
 
 main=function()
 {
