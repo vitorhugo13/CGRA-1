@@ -1,0 +1,57 @@
+/**
+ * MyTriangle
+ * 
+ */
+
+
+
+class MyTriangle extends CGFobject {
+	constructor(scene) {
+		super(scene);
+		this.initBuffers();
+	}
+	initBuffers() {
+		this.vertices = [
+			-1, -1, 0,	//0
+			 1, -1, 0,	//1
+			-1,  1, 0,	//2
+
+			-1, -1, 0,	//3
+			 1, -1, 0,	//4
+			-1,  1, 0	//5
+		];
+
+		this.normals = [
+			0.0, 0.0,  1.0,
+			0.0, 0.0,  1.0,
+			0.0, 0.0,  1.0,
+
+			0.0, 0.0, -1.0,
+			0.0, 0.0, -1.0,
+			0.0, 0.0, -1.0
+		];
+
+		/* Counter-clockwise reference of vertices
+		   this is how we indicate the front of the figure */
+		this.indices = [
+			0, 1, 2,
+			2, 1, 0,
+
+			3,4,5,
+			5,4,3
+		];
+
+		this.texCoords = [
+			0.00, 1.00,
+			0.50, 1.00,
+			0.00, 0.50,
+			
+	
+			0.00, 1.00,
+			0.50, 1.00,
+			0.00, 0.50
+		]
+		this.primitiveType = this.scene.gl.TRIANGLES;
+		this.initGLBuffers();
+	}
+}

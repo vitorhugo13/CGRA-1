@@ -25,10 +25,10 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
-        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
-        
+        this.bird=new MyBird(this,this.body, this.eyes, this.nose);
+        //this.terrain = new MyTerrain(this);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -71,12 +71,22 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyA")) {
             text += " A ";
             keysPressed = true;
-            this.bird.turn(Math.PI / 6);
+            this.bird.turn(Math.PI / 10);
         }
         if (this.gui.isKeyPressed("KeyD")) {
             text += " D ";
             keysPressed = true;
-            this.bird.turn(- Math.PI / 6);            
+            this.bird.turn(- Math.PI / 10);            
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " R ";
+            keysPressed = true;
+            this.bird.reset();
+        }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text += " P ";
+            keysPressed = true;
+            this.bird.descend();
         }
 
         if (keysPressed) {
@@ -86,6 +96,63 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.bird.update(t);
+    }
+
+    initMaterials(){
+        // grass cube side texture
+        this.grassSide = new CGFappearance(this);
+        this.grassSide.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassSide.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassSide.setShininess(10.0);
+        this.grassSide.loadTexture('images/hill/grassSide.png');
+        this.grassSide.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // grass cube top texture
+        this.grassTop = new CGFappearance(this);
+        this.grassTop.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassTop.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassTop.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassTop.setShininess(10.0);
+        this.grassTop.loadTexture('images/hill/grassTop.png');
+        this.grassTop.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // grass cube bottom texture
+        this.grassBottom = new CGFappearance(this);
+        this.grassBottom.setAmbient(0.1, 0.1, 0.1, 1);
+        this.grassBottom.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.grassBottom.setSpecular(0.1, 0.1, 0.1, 1);
+        this.grassBottom.setShininess(10.0);
+        this.grassBottom.loadTexture('images/hill/grassBottom.png');
+        this.grassBottom.setTextureWrap('REPEAT', 'REPEAT');
+        
+        // body of bird texture
+        this.body = new CGFappearance(this);
+        this.body.setAmbient(0.1, 0.1, 0.1, 1);
+        this.body.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.body.setSpecular(0.1, 0.1, 0.1, 1);
+        this.body.setShininess(10.0);
+        this.body.loadTexture('textures/bird/body.png');
+        this.body.setTextureWrap('REPEAT', 'REPEAT');
+
+        // eyes of bird texture
+        this.eyes = new CGFappearance(this);
+        this.eyes.setAmbient(0.1, 0.1, 0.1, 1);
+        this.eyes.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.eyes.setSpecular(0.1, 0.1, 0.1, 1);
+        this.eyes.setShininess(10.0);
+        this.eyes.loadTexture('textures/bird/eyes.jpg');
+        this.eyes.setTextureWrap('REPEAT', 'REPEAT');
+
+        // nose of bird texture
+        this.nose = new CGFappearance(this);
+        this.nose.setAmbient(0.1, 0.1, 0.1, 1);
+        this.nose.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.nose.setSpecular(0.1, 0.1, 0.1, 1);
+        this.nose.setShininess(10.0);
+        this.nose.loadTexture('textures/bird/nose.jpg');
+        this.nose.setTextureWrap('REPEAT', 'REPEAT');
+
     }
 
     display() {
@@ -113,6 +180,6 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.bird.display();
-        // ---- END Primitive drawing section
+        // ---- END Primitive drawing section    
     }
 }
