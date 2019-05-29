@@ -274,7 +274,12 @@ class MyScene extends CGFscene {
         this.treeBranch.display();
         this.popMatrix();
 
+
+        this.pushMatrix();
+        this.translate(0,5,0);
         this.bird.display();
+        this.popMatrix();
+       
 
        
         this.pushMatrix();
