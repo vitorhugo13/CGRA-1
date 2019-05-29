@@ -20,7 +20,7 @@ class TopOfCilinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        var ang =  2 * Math.PI / this.slices;
+        var ang = ( 2 * Math.PI ) / (this.slices);
         
         for (var i = 0 ; i < this.slices ; i++) {
 

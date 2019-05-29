@@ -146,6 +146,8 @@ class MyBird extends CGFobject {
         this.eye1  = new MyUnitCubeQuad(this.scene,this.eyesT,this.eyesT,this.eyesT);
         this.eye2  = new MyUnitCubeQuad(this.scene,this.eyesT,this.eyesT,this.eyesT);
         this.tail  = new MyTriangle(this.scene);
+        this.esfera1 = new MySphere(this.scene,20,20);
+        this.esfera2 = new MySphere(this.scene,20,20);
 
     } 
 
@@ -156,9 +158,26 @@ class MyBird extends CGFobject {
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             
+        
+
+
         this.scene.pushMatrix();
         this.body.display();
         this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.esfera1.display();
+        this.scene.popMatrix();
+       
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI,1,0,0);
+        this.esfera2.display();
+        this.scene.popMatrix();
+
+
+
+
 
         this.scene.pushMatrix();
         this.scene.translate(0,1,0.5);
