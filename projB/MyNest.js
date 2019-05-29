@@ -19,5 +19,15 @@ class MyNest extends CGFobject{
 
     display(){
         
+        //var angle=0;
+
+        for(var i =0; i<100;i++){
+            this.scene.pushMatrix();
+            this.scene.rotate(i*Math.PI/30,0,1,1);
+            this.straw.display();
+            this.scene.popMatrix();
+        }
+        
+        
     }
 }

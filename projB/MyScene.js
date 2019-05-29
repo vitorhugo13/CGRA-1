@@ -32,7 +32,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
         this.treeBranch = new MyTreeBranch(this,this.stickSide,this.stick);
-        this.nest = new MyNestFeature(this,this.stickSide);
+        this.nest = new MyNest(this,this.stickSide);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -268,7 +268,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        //this.terrain.display();
+        this.terrain.display();
         
         // ---- END Primitive drawing section
         /*
@@ -279,34 +279,43 @@ class MyScene extends CGFscene {
         this.popMatrix();
         */
 
-        /*
+        
         this.pushMatrix();
         this.translate(2,7,-2);
         this.treeBranch.display();
         this.popMatrix();
-        */
+        
 
-/*
+
         this.pushMatrix();
         this.translate(0,5,0);
         this.bird.display();
         this.popMatrix();
-       */
+       
 
-       /*
+       
         this.pushMatrix();
         this.day.apply();
         this.cubeMap.display();
         this.popMatrix();
-        */
         
-/*
+        
+
         this.pushMatrix();
         this.translate(4,2.7,-3);
         this.house.display();
         this.popMatrix();
-*/
+   
+
+
+        this.pushMatrix();
+        this.translate(-2,3,-1);
+        this.rotate(-Math.PI/4,1,0,0);
+        this.scale(0.5,0.5,0.5);
         this.nest.display();
+        this.popMatrix();
+
+
 
     }
 }
