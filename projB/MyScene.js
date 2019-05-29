@@ -170,6 +170,24 @@ class MyScene extends CGFscene {
         this.day.loadTexture('images/day.png');
         this.day.setTextureWrap('REPEAT', 'REPEAT');
 
+
+        //MyTree Branch stick
+
+        this.stickSide = new CGFappearance(this);
+        this.stickSide.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stickSide.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stickSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stickSide.setShininess(10.0);
+        this.stickSide.loadTexture('images/house/pillar.jpg');
+        this.stickSide.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.stick = new CGFappearance(this);
+        this.stick.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stick.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stick.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stick.setShininess(10.0);
+        this.stick.loadTexture('images/house/pillar.jpg');
+        this.stick.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
