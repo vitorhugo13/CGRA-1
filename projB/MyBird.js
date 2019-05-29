@@ -10,7 +10,11 @@ class MyBird extends CGFobject {
 
         this.orientation = 0;
         this.speed = 0;
-        this.position = [0, 6, 0];
+
+        this.x = 0;
+        this.y = 6;
+        this.z = 0;
+
         this.wingAngle = 0;
 
         this.bodyT = body;
@@ -23,6 +27,9 @@ class MyBird extends CGFobject {
             ASCENDING : 2,
         };
         this.state = this.BirdState.NORMAL;
+
+        this.hasBranch = false;
+        this.branch = null;
         
         // variables connected to MyInterface
         this.speedFactor = 1;
@@ -37,6 +44,9 @@ class MyBird extends CGFobject {
 
     turn(angle) {
         this.orientation += angle;
+
+        if (this.hasBranch)
+            this.branch.updateOrientation(angle);
     }
 
     accelerate(speedIncrement) {
@@ -46,33 +56,76 @@ class MyBird extends CGFobject {
     reset() {
         this.orientation = 0;
         this.speed = 0;
-        this.position = [0, 6, 0];
+        this.x = 0;
+        this.y = 6;
+        this.z = 0;
+    }
+
+    getDistanceToBranch(branch) {
+        return Math.sqrt(Math.pow(this.x - branch.x, 2) + Math.pow(this.z - branch.z, 2));
+    }
+
+    grabBranch() {
+        for (var i = 0; i < this.scene.branches.length; i++) {
+            if (this.getDistanceToBranch(this.scene.branches[i]) > 2)
+                continue;
+            
+            this.hasBranch = true;
+            this.branch = this.scene.branches[i];
+            this.scene.branches.splice(i, 1);
+            this.branch.setPosition(this.x, 2.8, this.z);
+            this.branch.setOrientation(this.orientation);
+            break;
+        }
+    }
+
+    setPosition(x, y, z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+
+        if (!this.hasBranch)
+            return;
+        this.branch.updatePosition(x, y, z);
+    }
+
+    updatePosition(x, y, z) {
+        this.x += x;
+        this.y += y;
+        this.z += z;
+
+        if (!this.hasBranch)
+            return;
+        this.branch.updatePosition(x, y, z);
     }
 
     update(time) {
-        this.timeFactor = 200;
 
-        this.position[0] = this.position[0] + this.speed * Math.cos(-this.orientation);
-        this.position[2] = this.position[2] + this.speed * Math.sin(-this.orientation);
+        this.updatePosition(this.speed * Math.cos(-this.orientation), 0, this.speed * Math.sin(-this.orientation));
 
         switch (this.state) {
             case this.BirdState.NORMAL:
                 this.verticalRange = 0.1;
-                this.position[1] = this.position[1] + Math.sin(time / this.timeFactor * this.speedFactor) * this.verticalRange;
+                this.timeFactor = 200;
+                this.updatePosition(0, Math.sin(time / this.timeFactor * this.speedFactor) * this.verticalRange, 0);
                 break;
             case this.BirdState.DESCENDING:
-                if (this.position[1] <= 2.9) {
+                if (this.y <= 2.9) {
                     this.state = this.BirdState.ASCENDING;
+
+                    if (!this.hasBranch)
+                        this.getBranch();
+
                     break;
                 }
-                this.position[1] -= 0.2;
+                this.updatePosition(0, -0.2, 0);
                 break;
             case this.BirdState.ASCENDING:
-                if (this.position[1] >= 6) {
+                if (this.y >= 6) {
                     this.state = this.BirdState.NORMAL;
                     break;
                 }
-                this.position[1] += 0.2;
+                this.updatePosition(0, 0.2, 0);
                 break;
         }
 
@@ -194,6 +247,10 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
     
         this.scene.popMatrix();
+
+        if (!this.hasBranch)
+            return;
+        this.branch.display();
     }
 
     enableNormalViz() {

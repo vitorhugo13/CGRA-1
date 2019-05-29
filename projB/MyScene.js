@@ -30,10 +30,8 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this);
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
-
-        this.branches = {};
-        
-        //Objects connected to MyInterface
+        this.branches = [];
+        this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, this.stick, this.stickSide));
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -222,6 +220,24 @@ class MyScene extends CGFscene {
         this.day.loadTexture('images/day.png');
         this.day.setTextureWrap('REPEAT', 'REPEAT');
 
+
+        //MyTree Branch stick
+
+        this.stickSide = new CGFappearance(this);
+        this.stickSide.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stickSide.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stickSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stickSide.setShininess(10.0);
+        this.stickSide.loadTexture('textures/branch/trunk.jpeg');
+        this.stickSide.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.stick = new CGFappearance(this);
+        this.stick.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stick.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stick.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stick.setShininess(10.0);
+        this.stick.loadTexture('textures/branch/top.jpeg');
+        this.stick.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
@@ -242,7 +258,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.terrain.display();
+       // this.terrain.display();
         
         // ---- END Primitive drawing section
         /*
@@ -253,17 +269,22 @@ class MyScene extends CGFscene {
         this.popMatrix();
         */
 
-        this.bird.display();
+        for (var i = 0; i < this.branches.length; i++) {
+            this.branches[i].display();
+        }
 
+        this.bird.display();
+       
         this.pushMatrix();
         this.day.apply();
         this.cubeMap.display();
         this.popMatrix();
-
+        
+/*
         this.pushMatrix();
         this.translate(4,2.7,-3);
         this.house.display();
         this.popMatrix();
-       
+       */
     }
 }
