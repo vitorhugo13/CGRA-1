@@ -21,8 +21,9 @@ class MyTreeBranch extends CGFobject{
     }
 
     initBuffers(){
-        this.stick = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.topT);
-        this.stick2 = new MyUnitCubeQuad(this.scene,this.topT,this.sideT,this.topT);
+        this.stick = new MyCilinderWTop(this.scene,20,this.sideT,this.topT);
+        this.stick2 = new MyCilinderWTop(this.scene,20,this.sideT,this.topT);
+        
     }
     
     setPosition(x, y, z) {
@@ -47,6 +48,7 @@ class MyTreeBranch extends CGFobject{
 
     display(){
 
+        
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
@@ -57,10 +59,10 @@ class MyTreeBranch extends CGFobject{
         this.scene.scale(1,0.1,0.05);
         this.stick2.display();
         this.scene.popMatrix();
-
-
+        
+        
         this.scene.pushMatrix();
-        this.scene.scale(3.5,0.2,0.1);
+        this.scene.scale(3.5,0.05,0.1);
         this.scene.rotate(Math.PI/2,0,0,1);
         this.stick.display();
         this.scene.popMatrix();

@@ -67,14 +67,16 @@ class MyBird extends CGFobject {
 
     grabBranch() {
         for (var i = 0; i < this.scene.branches.length; i++) {
-            if (this.getDistanceToBranch(this.scene.branches[i]) > 2)
+            if (this.getDistanceToBranch(this.scene.branches[i]) > 5)
                 continue;
             
             this.hasBranch = true;
             this.branch = this.scene.branches[i];
             this.scene.branches.splice(i, 1);
             this.branch.setPosition(this.x, 2.8, this.z);
-            this.branch.setOrientation(this.orientation);
+            this.branch.setOrientation(Math.PI / 2);
+            
+            console.log("Caught a branch\n");
             break;
         }
     }
@@ -114,7 +116,7 @@ class MyBird extends CGFobject {
                     this.state = this.BirdState.ASCENDING;
 
                     if (!this.hasBranch)
-                        this.getBranch();
+                        this.grabBranch();
 
                     break;
                 }
@@ -149,7 +151,7 @@ class MyBird extends CGFobject {
 
     display(){
         this.scene.pushMatrix();
-        this.scene.translate(this.position[0], this.position[1], this.position[2]);
+        this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
