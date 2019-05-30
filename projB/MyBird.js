@@ -11,9 +11,13 @@ class MyBird extends CGFobject {
         this.orientation = 0;
         this.speed = 0;
 
-        this.x = 0;
-        this.y = 6;
-        this.z = 0;
+        this.x0 = 0;
+        this.y0 = 6;
+        this.z0 = 0;
+
+        this.x = this.x0;
+        this.y = this.y0;
+        this.z = this.z0;
 
         this.wingAngle = 0;
 
@@ -62,9 +66,9 @@ class MyBird extends CGFobject {
     reset() {
         this.orientation = 0;
         this.speed = 0;
-        this.x = 0;
-        this.y = 6;
-        this.z = 0;
+        this.x = this.x0;
+        this.y = this.y0;
+        this.z = this.z0;
 
         if (!this.hasBranch)
             return;
@@ -113,7 +117,7 @@ class MyBird extends CGFobject {
 
         if (!this.hasBranch)
             return;
-        this.branch.updatePosition(x, y, z);
+        this.branch.setPosition(x, y - 1, z);
     }
 
     updatePosition(x, y, z) {
@@ -134,7 +138,7 @@ class MyBird extends CGFobject {
             case this.BirdState.NORMAL:
                 this.verticalRange = 0.1;
                 this.timeFactor = 200;
-                this.updatePosition(0, Math.sin(time / this.timeFactor) * this.verticalRange, 0);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
+                this.setPosition(this.x, this.y0 + Math.sin(time / 2 / Math.PI * 0.05 * this.speedFactor) * this.verticalRange, this.z);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
                 break;
             case this.BirdState.DESCENDING:
                 if (this.y > 2.9) {
@@ -158,7 +162,7 @@ class MyBird extends CGFobject {
                 break;
         }
 
-        this.wingAngle = Math.sin(time / this.timeFactor * this.speedFactor) * Math.PI / 8;
+        this.wingAngle = Math.sin(time / 2 / Math.PI * 0.05 * this.speedFactor) * Math.PI / 8;
     }
 
     initBuffers() {
