@@ -45,11 +45,16 @@ All code developed for the TP classes of the CGRA course
 * **TODO**:
     * change the bird model (body, head, eyes, beak and wings) (dimensions: 2 units, wingspan: up to 3 units);
     * fix bird movement : 
+        [ ] check if the bird is supposed to go back or just decrease its speed
         [ ] when the speedFactor is lower the oscilation has a bigger amplitude
         [X] the speedFactor does not change the current movement speed but only the increments
         [X] change the period of the up and down movement to 2 seconds
         [X] when the bird is reset, the position of the branch he is carrying is not reset
-    * pass the branch from the bird to the nest;
+    * pick up and drop off branch:
+        [X] pick up the branch
+        [ ] generic location for the branch when the bird is holding it
+        [X] drop off the branch at the nest
+        [ ] generic location for when the branch is on the nest
     * improve house model and textures (side: at least 3 units, up to 8 units away from the origin);
     * improve skybox texture;
     * improve branch model;

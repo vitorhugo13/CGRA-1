@@ -34,7 +34,8 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
         this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, 0, this.stick, this.stickSide));
-        this.nest = new MyNest(this,this.stickSide);
+        this.nest = new MyNest(this, -2, 3, -1, this.stickSide);
+        this.nestFeature = new MyNestFeature(this, this.stickSide);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -297,12 +298,17 @@ class MyScene extends CGFscene {
         this.house.display();
         this.popMatrix();
    
+        /*
         this.pushMatrix();
-        this.translate(-2,3,-1);
+        this.translate();
         this.rotate(-Math.PI/4,1,0,0);
         this.scale(0.5,0.5,0.5);
+        */
         this.nest.display();
+        /*
         this.popMatrix();
+        */
 
+        this.nestFeature.display();
     }
 }

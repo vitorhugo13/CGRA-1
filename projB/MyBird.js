@@ -93,6 +93,19 @@ class MyBird extends CGFobject {
         }
     }
 
+    getDistanceToNest() {
+        return Math.sqrt(Math.pow(this.x - this.scene.nest.x, 2) + Math.pow(this.z - this.scene.nest.z, 2));
+    }
+
+    dropBranch() {
+        if (this.getDistanceToNest() > 5)
+            return;
+        
+        this.scene.nest.addBranch(this.branch);
+        this.branch = null;
+        this.hasBranch = false;
+    }
+
     setPosition(x, y, z) {
         this.x = x;
         this.y = y;
@@ -124,15 +137,17 @@ class MyBird extends CGFobject {
                 this.updatePosition(0, Math.sin(time / this.timeFactor) * this.verticalRange, 0);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
                 break;
             case this.BirdState.DESCENDING:
-                if (this.y <= 2.9) {
-                    this.ascend();
-
-                    if (!this.hasBranch)
-                        this.grabBranch();
-
+                if (this.y > 2.9) {
+                    this.updatePosition(0, this.yDecrement, 0);
                     break;
                 }
-                this.updatePosition(0, this.yDecrement, 0);
+
+                if (!this.hasBranch)
+                    this.grabBranch();
+                else
+                    this.dropBranch();
+                
+                this.ascend();
                 break;
             case this.BirdState.ASCENDING:
                 if (this.y >= 6) {
