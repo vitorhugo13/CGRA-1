@@ -15,6 +15,7 @@ All code developed for the TP classes of the CGRA course
 * [**Project A**](#project-a) - *Application of the above*
 * [**TP05**](#tp05---shaders) - Shaders
 * [**TP06**](#tp06---procedural-modeling) - Procedural Modeling
+* [**Project B**](#project-b) - *Application of the above*
 
 #### TP01 - Setup and GUI
 * **Specification** : [Portuguese](specifications/tp01.pdf)
@@ -30,9 +31,28 @@ All code developed for the TP classes of the CGRA course
 
 #### Project A
 * **Specification** : [Portuguese](specifications/projA.pdf)
+* **Grade** : 17.8
 
 #### TP05 - Shaders
 * **Specification** : [Portuguese](specifications/tp05.pdf)
 
 #### TP06 - Procedural Modeling
 * **Specification** : [Portuguese](specifications/tp06.pdf)
+
+#### Project B
+* **Specification** : [Portuguese](specification/projB.pdf)
+* **Grade** :
+* **TODO**:
+    * change the bird model (body, head, eyes, beak and wings) (dimensions: 2 units, wingspan: up to 3 units);
+    * fix bird movement : 
+        [ ] when the speedFactor is lower the oscilation has a bigger amplitude
+        [X] the speedFactor does not change the current movement speed but only the increments
+        [X] change the period of the up and down movement to 2 seconds
+        [X] when the bird is reset, the position of the branch he is carrying is not reset
+    * pass the branch from the bird to the nest;
+    * improve house model and textures (side: at least 3 units, up to 8 units away from the origin);
+    * improve skybox texture;
+    * improve branch model;
+    * place at least 4 branches on the scene;
+    * lighting and animation
+    * trees

@@ -40,6 +40,12 @@ class MyBird extends CGFobject {
 
     descend() {
         this.state = this.BirdState.DESCENDING;
+        this.yDecrement = - (this.y - 2.9) * this.scene.updatePeriod / 1000;
+    }
+
+    ascend() {
+        this.state = this.BirdState.ASCENDING;
+        this.yIncrement = (6 - this.y) * this.scene.updatePeriod / 1000;
     }
 
     turn(angle) {
@@ -50,7 +56,7 @@ class MyBird extends CGFobject {
     }
 
     accelerate(speedIncrement) {
-        this.speed += speedIncrement * this.speedFactor;
+        this.speed += speedIncrement;
     }
 
     reset() {
@@ -59,6 +65,12 @@ class MyBird extends CGFobject {
         this.x = 0;
         this.y = 6;
         this.z = 0;
+
+        if (!this.hasBranch)
+            return;
+
+        this.branch.setPosition(0, 4, 0);
+        this.branch.setOrientation(this.orientation + Math.PI / 2);
     }
 
     getDistanceToBranch(branch) {
@@ -74,7 +86,7 @@ class MyBird extends CGFobject {
             this.branch = this.scene.branches[i];
             this.scene.branches.splice(i, 1);
             this.branch.setPosition(this.x, 2.8, this.z);
-            this.branch.setOrientation(Math.PI / 2);
+            this.branch.setOrientation(this.orientation + Math.PI / 2);
             
             console.log("Caught a branch\n");
             break;
@@ -103,31 +115,31 @@ class MyBird extends CGFobject {
 
     update(time) {
 
-        this.updatePosition(this.speed * Math.cos(-this.orientation), 0, this.speed * Math.sin(-this.orientation));
+        this.updatePosition(this.speed * Math.cos(-this.orientation) * this.speedFactor, 0, this.speed * Math.sin(-this.orientation) * this.speedFactor);
 
         switch (this.state) {
             case this.BirdState.NORMAL:
                 this.verticalRange = 0.1;
                 this.timeFactor = 200;
-                this.updatePosition(0, Math.sin(time / this.timeFactor * this.speedFactor) * this.verticalRange, 0);
+                this.updatePosition(0, Math.sin(time / this.timeFactor) * this.verticalRange, 0);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
                 break;
             case this.BirdState.DESCENDING:
                 if (this.y <= 2.9) {
-                    this.state = this.BirdState.ASCENDING;
+                    this.ascend();
 
                     if (!this.hasBranch)
                         this.grabBranch();
 
                     break;
                 }
-                this.updatePosition(0, -0.2, 0);
+                this.updatePosition(0, this.yDecrement, 0);
                 break;
             case this.BirdState.ASCENDING:
                 if (this.y >= 6) {
                     this.state = this.BirdState.NORMAL;
                     break;
                 }
-                this.updatePosition(0, 0.2, 0);
+                this.updatePosition(0, this.yIncrement, 0);
                 break;
         }
 

@@ -20,7 +20,9 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
+
+        this.updatePeriod = 50; // miliseconds
+        this.setUpdatePeriod(this.updatePeriod);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -290,25 +292,17 @@ class MyScene extends CGFscene {
         this.cubeMap.display();
         this.popMatrix();
         
-        
-
         this.pushMatrix();
         this.translate(4,2.7,-3);
         this.house.display();
         this.popMatrix();
    
-
-
         this.pushMatrix();
         this.translate(-2,3,-1);
         this.rotate(-Math.PI/4,1,0,0);
         this.scale(0.5,0.5,0.5);
         this.nest.display();
         this.popMatrix();
-
-
-    
-
 
     }
 }
