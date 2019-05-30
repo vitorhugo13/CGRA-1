@@ -28,8 +28,18 @@ class MyTriangleSmall extends CGFobject {
 		   this is how we indicate the front of the figure */
 		this.indices = [
             0, 2, 1,
-            4,5,3
-		];
+            4, 5, 3
+        ];
+        
+        this.texCoords = [
+            0,0,
+            1,1,
+            0,1,
+
+            0,0,
+            1,1,
+            0,1
+        ];
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
