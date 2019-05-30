@@ -1,13 +1,12 @@
-/**
+/*
  * MyQuad
+ *
  * 
  */
 class MyQuad extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
-
-		//deleted s and t from arguments in the constructor
 	}
 	
 	initBuffers() {
@@ -41,21 +40,10 @@ class MyQuad extends CGFobject {
 		this.indices = [
 			0, 1, 2,
 			1, 3, 2,
-			2, 1 ,0,
-			2, 3, 1,
-		];
 
-		
-		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
+			6, 5, 4,
+			6, 7, 5
+		];
 
 		this.texCoords = [
 			0, 1,
@@ -67,22 +55,9 @@ class MyQuad extends CGFobject {
 			1, 1,
 			0, 0,
 			1, 0
-		]
+		];
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
-
-	updateTexCoords(s, t) {
-
-		for (var i = 0; i < 4; i++) {
-			this.texCoords[i * 2] *= s;
-			this.texCoords[i * 2 + 1] *= t;
-			console.log(this.texCoords[i * 2]);
-			console.log(this.texCoords[i * 2 + 1]);
-
-		}
-		this.updateTexCoordsGLBuffers();
-	}
-
 }
-

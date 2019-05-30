@@ -113,7 +113,7 @@ class MyScene extends CGFscene {
         this.body.setDiffuse(0.9, 0.9, 0.9, 1);
         this.body.setSpecular(0.1, 0.1, 0.1, 1);
         this.body.setShininess(10.0);
-        this.body.loadTexture('textures/bird/body.png');
+        this.body.loadTexture('textures/bird/body.jpg');
         this.body.setTextureWrap('REPEAT', 'REPEAT');
 
         // eyes of bird texture
