@@ -43,7 +43,7 @@ All code developed for the TP classes of the CGRA course
 * **Specification** : [Portuguese](specification/projB.pdf)
 * **Grade** :
 * **TODO**:
-    * change the bird model (body, head, eyes, beak and wings) (dimensions: 2 units, wingspan: up to 3 units);
+    * change the bird model (body, head, eyes, beak and wings) (dimensions: 2 units, wingspan: up to 3 units) .[X].;
     * fix bird movement :
         [ ] set a fixed period of oscilation of 1 second
         [ ] when the speedFactor is lower the oscilation has a bigger amplitude
