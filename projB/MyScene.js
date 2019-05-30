@@ -251,6 +251,14 @@ class MyScene extends CGFscene {
         this.straw.setShininess(10.0);
         this.straw.loadTexture('textures/nest/straw.jpeg');
         this.straw.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.light = new CGFappearance(this);
+        this.light.setAmbient(0.1, 0.1, 0.1, 1);
+        this.light.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.light.setSpecular(0.1, 0.1, 0.1, 1);
+        this.light.setShininess(10.0);
+        this.light.loadTexture('textures/lightning/light.jpg');
+        this.light.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
