@@ -43,6 +43,8 @@ class MyScene extends CGFscene {
         this.lightning = new MyLightning(this);
         this.startLightingAnimation = false;
         this.displayLightning = false;
+
+        this.tree = new MyLSPlant(this);
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -326,7 +328,9 @@ class MyScene extends CGFscene {
         if (this.displayLightning) {
             this.lightningT.apply();
             this.lightning.display();
-        }    
+        } 
+
+        this.tree.display();
         // ---- END Primitive drawing section
     }
 }

@@ -13,7 +13,7 @@ class MyTerrain extends CGFobject{
     
     initBuffers() {
         this.terrainShader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
-        this.plane = new Plane(this.scene,32); 
+        this.plane = new Plane(this.scene, 32); 
         this.terrainShader.setUniformsValues({terrainMap: 1, terrainAltimetry: 2});
         //this.terrainShader.setUniformsValues({uSampler2: 1, uSampler3: 2});
     }
