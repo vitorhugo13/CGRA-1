@@ -33,10 +33,10 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
-        this.branches.push(new MyTreeBranch(this, -2, -0.3, 0, 0, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, -2, -0.3, 1, 1.4, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, 0, -0.3, 0, Math.PI+2.14, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, 2, -0.3, 3.5, Math.PI, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -9, -0.3, 0, 0, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -3, -0.3, 3, 1.2, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -4, -0.3, -4, Math.PI+2.14, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 8, -0.3, 3.5, Math.PI, this.stick, this.stickSide));
         
         this.nest = new MyNest(this, -4, -0.7, -18, this.stickSide);
         
