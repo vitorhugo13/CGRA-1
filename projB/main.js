@@ -12,6 +12,7 @@ serialInclude(['../lib/CGF.js','MyScene.js', 'MyInterface.js', 'Plane.js',
                     'MyNest.js','MyNestFeature.js',
                     'MySphere.js',
                     'lsystems/MyLSystem.js', 'lsystems/MyLightning.js', 'lsystems/MyLightningSegment.js',
+                    'MyTriangleSmall.js',
 
 main=function()
 {

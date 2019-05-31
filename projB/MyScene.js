@@ -33,8 +33,12 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
-        this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, 0, this.stick, this.stickSide));
-        this.nest = new MyNest(this, -2, 3, -1, this.stickSide);
+        this.branches.push(new MyTreeBranch(this, -2, -0.3, 0, 0, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -2, -0.3, 1, 1.4, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 0, -0.3, 0, Math.PI+2.14, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 2, -0.3, 3.5, Math.PI, this.stick, this.stickSide));
+        
+        this.nest = new MyNest(this, -4, -0.7, -18, this.stickSide);
         
         this.lightning = new MyLightning(this);
         this.startLightingAnimation = false;
@@ -125,7 +129,7 @@ class MyScene extends CGFscene {
         this.body.setDiffuse(0.9, 0.9, 0.9, 1);
         this.body.setSpecular(0.1, 0.1, 0.1, 1);
         this.body.setShininess(10.0);
-        this.body.loadTexture('textures/bird/body.png');
+        this.body.loadTexture('textures/bird/body.jpg');
         this.body.setTextureWrap('REPEAT', 'REPEAT');
 
         // eyes of bird texture
@@ -294,30 +298,35 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
+        // ---- BEGIN Primitive drawing section
+        this.pushMatrix();
+        this.translate(0,-3,0);
+        this.terrain.display();
+        this.popMatrix();
         
-        this.terrain.display();        
-
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();
         }
-
+        
         this.bird.display();
-       
+        
         this.pushMatrix();
         this.day.apply();
         this.cubeMap.display();
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(4,2.7,-3);
+        this.scale(3, 3, 3);
+        this.translate(4,0,-1);
         this.house.display();
         this.popMatrix();
-
-        this.nest.display();   
+        
+        this.nest.display();
         
         if (this.displayLightning) {
             this.lightningT.apply();
             this.lightning.display();
-        }
+        }    
+        // ---- END Primitive drawing section
     }
 }
