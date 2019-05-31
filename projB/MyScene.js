@@ -33,7 +33,11 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
-        this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, 0, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -2, -0.3, 0, 0, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -2, -0.3, 1, 1.4, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 0, -0.3, 0, Math.PI+2.14, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 2, -0.3, 3.5, Math.PI, this.stick, this.stickSide));
+        
         this.nest = new MyNest(this, -2, 3, -1, this.stickSide);
         
     }
@@ -279,16 +283,15 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        this.pushMatrix();
+        this.translate(0,-3,0);
         this.terrain.display();
+        this.popMatrix();
         
         // ---- END Primitive drawing section
-        /*
-        this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
-        this.plane.display();
-        this.popMatrix();
-        */
+        
+       
+        
 
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();
@@ -302,11 +305,15 @@ class MyScene extends CGFscene {
         this.popMatrix();
         
         this.pushMatrix();
-        this.translate(4,2.7,-3);
+        this.scale(2.5,2.5,2.5);
+        this.translate(4,0,-1);
         this.house.display();
         this.popMatrix();
-   
+        
+        this.pushMatrix();
+        this.translate(-2,-4,-12);
         this.nest.display();
+        this.popMatrix();
        
         
 
