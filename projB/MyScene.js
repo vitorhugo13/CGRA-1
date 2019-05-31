@@ -35,7 +35,10 @@ class MyScene extends CGFscene {
         this.branches = [];
         this.branches.push(new MyTreeBranch(this, 0, 2.7, 0, 0, this.stick, this.stickSide));
         this.nest = new MyNest(this, -2, 3, -1, this.stickSide);
-        this.nestFeature = new MyNestFeature(this, this.stickSide);
+        
+        this.lightning = new MyLightning(this);
+        this.startLightingAnimation = false;
+        this.displayLightning = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -46,15 +49,7 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
-    initMaterials() {
-        this.yellow = new CGFappearance(this);
-        this.yellow.setAmbient(0.1, 0.1, 0.1, 1);
-        this.yellow.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.yellow.setSpecular(0.1, 0.1, 0.1, 1);
-        this.yellow.setShininess(10.0);
-        /*this.yellow.loadTexture('images/lantern/yellow.jpg');
-        this.yellow.setTextureWrap('REPEAT', 'REPEAT');*/
-    }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -95,14 +90,31 @@ class MyScene extends CGFscene {
             keysPressed = true;
             this.bird.descend();
         }
+        if (this.gui.isKeyPressed("KeyL")) {
+            text += " L ";
+            keysPressed = true;
+            if (!this.displayLightning)
+                this.startLightingAnimation = true;
+        }
 
         if (keysPressed) {
             console.log(text);
         }  
     }
+
     update(t){
         this.checkKeys();
         this.bird.update(t);
+
+        if (this.startLightingAnimation) {
+            this.startLightingAnimation = false;
+            this.displayLightning = true;
+            this.lightning.startAnimation(t);
+        }
+
+        if (!this.displayLightning)
+            return;
+        this.lightning.update(t);
     }
 
     initMaterials(){
@@ -134,7 +146,7 @@ class MyScene extends CGFscene {
         this.nose.loadTexture('textures/bird/nose.jpg');
         this.nose.setTextureWrap('REPEAT', 'REPEAT');
 
-            //house roof texture
+        //house roof texture
         this.rooft = new CGFappearance(this);
         this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
         this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -251,6 +263,18 @@ class MyScene extends CGFscene {
         this.straw.setShininess(10.0);
         this.straw.loadTexture('textures/nest/straw.jpeg');
         this.straw.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.lightningT = new CGFappearance(this);
+        this.lightningT.setAmbient(1, 1, 1, 1);
+        this.lightningT.setDiffuse(1, 1, 1, 1);
+        this.lightningT.setSpecular(1, 1, 1, 1);
+        this.lightningT.setShininess(10.0);
+        this.lightningT.loadTexture('textures/lightning.png');
+        this.lightningT.setTextureWrap('REPEAT', 'REPEAT');
+    }
+
+    randomNumber(min, max) {
+        return Math.random() * (max - min + 1) + min;
     }
 
     display() {
@@ -263,24 +287,15 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-
+        
         // Draw axis
         this.axis.display();
-
+        
         //Apply default appearance
         this.setDefaultAppearance();
 
-        // ---- BEGIN Primitive drawing section
-        this.terrain.display();
         
-        // ---- END Primitive drawing section
-        /*
-        this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
-        this.plane.display();
-        this.popMatrix();
-        */
+        this.terrain.display();        
 
         for (var i = 0; i < this.branches.length; i++) {
             this.branches[i].display();
@@ -297,18 +312,12 @@ class MyScene extends CGFscene {
         this.translate(4,2.7,-3);
         this.house.display();
         this.popMatrix();
-   
-        /*
-        this.pushMatrix();
-        this.translate();
-        this.rotate(-Math.PI/4,1,0,0);
-        this.scale(0.5,0.5,0.5);
-        */
-        this.nest.display();
-        /*
-        this.popMatrix();
-        */
 
-        this.nestFeature.display();
+        this.nest.display();   
+        
+        if (this.displayLightning) {
+            this.lightningT.apply();
+            this.lightning.display();
+        }
     }
 }

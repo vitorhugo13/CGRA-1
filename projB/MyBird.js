@@ -136,7 +136,7 @@ class MyBird extends CGFobject {
 
         switch (this.state) {
             case this.BirdState.NORMAL:
-                this.verticalRange = 0.1;
+                this.verticalRange = 0.3;
                 this.timeFactor = 200;
                 this.setPosition(this.x, this.y0 + Math.sin(time / 2 / Math.PI * 0.05 * this.speedFactor) * this.verticalRange, this.z);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
                 break;

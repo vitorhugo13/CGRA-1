@@ -12,7 +12,6 @@ class MyLSystem extends CGFobject {
     init(){
         // cria o lexico da gramática
         this.initGrammar();
-
     }
 
     // cria o lexico da gramática
@@ -43,7 +42,7 @@ class MyLSystem extends CGFobject {
 
         // desenvolve a sequencia de desenvolvimento do Sistema L
         this.iterate()
-     }
+    }
 
   
     // desenvolve o axioma ao longo de uma sequência de desenvolvimento com um determinado número de iterações
