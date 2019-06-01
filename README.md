@@ -42,22 +42,3 @@ All code developed for the TP classes of the CGRA course
 #### Project B
 * **Specification** : [Portuguese](specification/projB.pdf)
 * **Grade** :
-* **TODO**:
-    * change the bird model (body, head, eyes, beak and wings) (dimensions: 2 units, wingspan: up to 3 units) [X];
-    * fix bird movement :
-        [ ] set a fixed period of oscilation of 1 second
-        [X] when the speedFactor is lower the oscilation has a bigger amplitude
-        [X] the speedFactor does not change the current movement speed but only the increments
-        [X] change the period of the up and down movement to 2 seconds
-        [X] when the bird is reset, the position of the branch he is carrying is not reset
-    * pick up and drop off branch:
-        [X] pick up the branch
-        [ ] generic location for the branch when the bird is holding it
-        [X] drop off the branch at the nest
-        [ ] generic location for when the branch is on the nest
-    * improve house model and textures (side: at least 3 units, up to 8 units away from the origin);
-    * improve skybox texture;
-    * improve branch model;
-    * place at least 4 branches on the scene;
-    * lighting and animation
-    * trees

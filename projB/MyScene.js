@@ -28,23 +28,27 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         //this.plane = new Plane(this, 32);
 
-        this.bird=new MyBird(this,this.body, this.eyes, this.nose);
+        this.bird = new MyBird(this,this.body, this.eyes, this.nose);
         this.terrain = new MyTerrain(this);
         this.house = new MyHouse(this, this.rooft, this.houset, this.pillart);
         this.cubeMap = new MyCubeMap(this);
         this.branches = [];
-        this.branches.push(new MyTreeBranch(this, -9, -0.3, 0, 0, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, -3, -0.3, 3, 1.2, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, -4, -0.3, -4, Math.PI+2.14, this.stick, this.stickSide));
-        this.branches.push(new MyTreeBranch(this, 8, -0.3, 3.5, Math.PI, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -9, 0, 0, 0, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -3, 0, 3, 1.2, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, -4, 0, -4, Math.PI+2.14, this.stick, this.stickSide));
+        this.branches.push(new MyTreeBranch(this, 8, 0, 3.5, Math.PI, this.stick, this.stickSide));
         
-        this.nest = new MyNest(this, -4, -0.7, -18, this.stickSide);
+        this.nest = new MyNest(this, -4, -0.55, -18, this.stickSide);
         
         this.lightning = new MyLightning(this);
         this.startLightingAnimation = false;
         this.displayLightning = false;
 
-        this.tree = new MyLSPlant(this);
+        this.trees = [];
+        for (var i = 0; i < 6; i++) {
+            this.trees[i] = new MyLSPlant(this);
+        }
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -123,6 +127,27 @@ class MyScene extends CGFscene {
         this.lightning.update(t);
     }
 
+    hexToRgbA(hex) {
+        var ret;
+        //either we receive a html/css color or a RGB vector
+        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+            ret=[
+                parseInt(hex.substring(1,3),16).toPrecision()/255.0,
+                parseInt(hex.substring(3,5),16).toPrecision()/255.0,
+                parseInt(hex.substring(5,7),16).toPrecision()/255.0,
+                1.0
+            ];
+        }
+        else
+            ret=[
+                hex[0].toPrecision()/255.0,
+                hex[1].toPrecision()/255.0,
+                hex[2].toPrecision()/255.0,
+                1.0
+            ];
+        return ret;
+    }
+
     initMaterials(){
 
         // body of bird texture
@@ -179,59 +204,6 @@ class MyScene extends CGFscene {
         this.pillart.loadTexture('textures/house/pillar.jpg');
         this.pillart.setTextureWrap('REPEAT', 'REPEAT');
 
-            //house roof texture
-        this.rooft = new CGFappearance(this);
-        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
-        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
-        this.rooft.setShininess(10.0);
-        this.rooft.loadTexture('textures/house/roof.jpg');
-        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
-
-        //house texture
-        this.houset = new CGFappearance(this);
-        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
-        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
-        this.houset.setShininess(10.0);
-        this.houset.loadTexture('textures/house/wall.jpg');
-        this.houset.setTextureWrap('REPEAT', 'REPEAT');
-
-        //house pillar texture
-        this.pillart = new CGFappearance(this);
-        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
-        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
-        this.pillart.setShininess(10.0);
-        this.pillart.loadTexture('textures/house/pillar.jpg');
-        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
-
-        //house roof texture
-        this.rooft = new CGFappearance(this);
-        this.rooft.setAmbient(0.1, 0.1, 0.1, 1);
-        this.rooft.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.rooft.setSpecular(0.1, 0.1, 0.1, 1);
-        this.rooft.setShininess(10.0);
-        this.rooft.loadTexture('textures/house/roof.jpg');
-        this.rooft.setTextureWrap('REPEAT', 'REPEAT');
-
-        //house texture
-        this.houset = new CGFappearance(this);
-        this.houset.setAmbient(0.1, 0.1, 0.1, 1);
-        this.houset.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.houset.setSpecular(0.1, 0.1, 0.1, 1);
-        this.houset.setShininess(10.0);
-        this.houset.loadTexture('textures/house/wall.jpg');
-        this.houset.setTextureWrap('REPEAT', 'REPEAT');
-
-        //house pillar texture
-        this.pillart = new CGFappearance(this);
-        this.pillart.setAmbient(0.1, 0.1, 0.1, 1);
-        this.pillart.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.pillart.setSpecular(0.1, 0.1, 0.1, 1);
-        this.pillart.setShininess(10.0);
-        this.pillart.loadTexture('textures/house/pillar.jpg');
-        this.pillart.setTextureWrap('REPEAT', 'REPEAT');
 
         this.day = new CGFappearance(this);
         this.day.setAmbient(0.1, 0.1, 0.1, 1);
@@ -261,7 +233,6 @@ class MyScene extends CGFscene {
         this.stick.loadTexture('textures/branch/top.jpeg');
         this.stick.setTextureWrap('REPEAT', 'REPEAT');
 
-
         this.straw = new CGFappearance(this);
         this.straw.setAmbient(0.1, 0.1, 0.1, 1);
         this.straw.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -270,13 +241,19 @@ class MyScene extends CGFscene {
         this.straw.loadTexture('textures/nest/straw.jpeg');
         this.straw.setTextureWrap('REPEAT', 'REPEAT');
 
+        let yellow = this.hexToRgbA("#fcfc7e");
         this.lightningT = new CGFappearance(this);
-        this.lightningT.setAmbient(1, 1, 1, 1);
-        this.lightningT.setDiffuse(1, 1, 1, 1);
-        this.lightningT.setSpecular(1, 1, 1, 1);
+        this.lightningT.setAmbient(yellow[0], yellow[1], yellow[2], 1);
+        this.lightningT.setDiffuse(yellow[0], yellow[1], yellow[2], 1);
+        this.lightningT.setSpecular(yellow[0], yellow[1], yellow[2], 1);
         this.lightningT.setShininess(10.0);
-        this.lightningT.loadTexture('textures/lightning.png');
-        this.lightningT.setTextureWrap('REPEAT', 'REPEAT');
+
+        let leaf_color = this.hexToRgbA("#027202");
+        this.leaf = new CGFappearance(this);
+        this.leaf.setAmbient(0.1/255, 0.145/255, 0.1/255, 1);
+        this.leaf.setDiffuse(leaf_color[0], leaf_color[1], leaf_color[2], 1);
+        this.leaf.setSpecular(0.1, 0.1, 0.1, 1);
+        this.leaf.setShininess(10.0);
     }
 
     randomNumber(min, max) {
@@ -302,7 +279,7 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
-        this.translate(0,-3,0);
+        this.translate(0, -2.8, 0);
         this.terrain.display();
         this.popMatrix();
         
@@ -325,12 +302,47 @@ class MyScene extends CGFscene {
         
         this.nest.display();
         
+        this.pushMatrix();
+        this.translate(10, 0, 10);
+        this.scale(2, 2, 2);
+        this.trees[0].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-10, 0, 15);
+        this.scale(2, 2, 2);
+        this.trees[1].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-20, 0, 0);
+        this.scale(2, 2, 2);
+        this.trees[2].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(12, 0, -5);
+        this.scale(2, 2, 2);
+        this.trees[3].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-5, 0, -10);
+        this.scale(2, 2, 2);
+        this.trees[4].display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-10, 0, -5);
+        this.scale(2, 2, 2);
+        this.trees[5].display();
+        this.popMatrix();
+        
         if (this.displayLightning) {
             this.lightningT.apply();
             this.lightning.display();
         } 
 
-        this.tree.display();
         // ---- END Primitive drawing section
     }
 }

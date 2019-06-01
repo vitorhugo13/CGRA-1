@@ -48,10 +48,10 @@ class MyTreeBranch extends CGFobject{
 
     display(){
 
-        
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.orientation, 0, 1, 0);
+        this.scene.translate(1.75, 0, 0);
 
         this.scene.pushMatrix();
         this.scene.translate(-1.5,0.0,0);
@@ -68,8 +68,7 @@ class MyTreeBranch extends CGFobject{
         this.stick.display();
         this.scene.popMatrix();
 
-        this.scene.popMatrix();
-        
+        this.scene.popMatrix();    
     }
 
     enableNormalViz() {

@@ -12,7 +12,7 @@ class MyBird extends CGFobject {
         this.speed = 0;
 
         this.x0 = 0;
-        this.y0 = 6;
+        this.y0 = 4;
         this.z0 = 0;
 
         this.x = this.x0;
@@ -44,12 +44,12 @@ class MyBird extends CGFobject {
 
     descend() {
         this.state = this.BirdState.DESCENDING;
-        this.yDecrement = - (this.y - 2.9) * this.scene.updatePeriod / 1000;
+        this.yDecrement = - (this.y - 0.5) * this.scene.updatePeriod / 1000;
     }
 
     ascend() {
         this.state = this.BirdState.ASCENDING;
-        this.yIncrement = (6 - this.y) * this.scene.updatePeriod / 1000;
+        this.yIncrement = (this.y0 - this.y) * this.scene.updatePeriod / 1000;
     }
 
     turn(angle) {
@@ -70,10 +70,12 @@ class MyBird extends CGFobject {
         this.y = this.y0;
         this.z = this.z0;
 
+        this.state = this.BirdState.NORMAL;
+
         if (!this.hasBranch)
             return;
 
-        this.branch.setPosition(0, 4, 0);
+        this.branch.setPosition(this.x0, this.y0, this.z0);
         this.branch.setOrientation(this.orientation + Math.PI / 2);
     }
 
@@ -83,13 +85,13 @@ class MyBird extends CGFobject {
 
     grabBranch() {
         for (var i = 0; i < this.scene.branches.length; i++) {
-            if (this.getDistanceToBranch(this.scene.branches[i]) > 5)
+            if (this.getDistanceToBranch(this.scene.branches[i]) > 3)
                 continue;
             
             this.hasBranch = true;
             this.branch = this.scene.branches[i];
             this.scene.branches.splice(i, 1);
-            this.branch.setPosition(this.x, 2.8, this.z);
+            this.branch.setPosition(this.x, this.y - 0.5 * this.scaleFactor, this.z);
             this.branch.setOrientation(this.orientation + Math.PI / 2);
             
             console.log("Caught a branch\n");
@@ -102,7 +104,7 @@ class MyBird extends CGFobject {
     }
 
     dropBranch() {
-        if (this.getDistanceToNest() > 5)
+        if (this.getDistanceToNest() > 3)
             return;
         
         this.scene.nest.addBranch(this.branch);
@@ -117,7 +119,7 @@ class MyBird extends CGFobject {
 
         if (!this.hasBranch)
             return;
-        this.branch.setPosition(x, y - 1, z);
+        this.branch.setPosition(x, y - 0.5 * this.scaleFactor, z);
     }
 
     updatePosition(x, y, z) {
@@ -138,10 +140,10 @@ class MyBird extends CGFobject {
             case this.BirdState.NORMAL:
                 this.verticalRange = 0.3;
                 this.timeFactor = 200;
-                this.setPosition(this.x, this.y0 + Math.sin(time / 2 / Math.PI * 0.05 * this.speedFactor) * this.verticalRange, this.z);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
+                this.setPosition(this.x, this.y0 + Math.sin(time / 2 / Math.PI * 0.05) * this.verticalRange, this.z);   // FIXME: when the speedFactor is lower the oscilation has a bigger amplitude
                 break;
             case this.BirdState.DESCENDING:
-                if (this.y > 2.9) {
+                if (this.y > 0.5) {
                     this.updatePosition(0, this.yDecrement, 0);
                     break;
                 }
@@ -154,7 +156,7 @@ class MyBird extends CGFobject {
                 this.ascend();
                 break;
             case this.BirdState.ASCENDING:
-                if (this.y >= 6) {
+                if (this.y >= this.y0) {
                     this.state = this.BirdState.NORMAL;
                     break;
                 }
@@ -233,7 +235,6 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
 
         
-        // TODO: change position of the wings so the quad is not inside the birds body
         this.scene.pushMatrix();
         this.scene.rotate(this.wingAngle, 0, 0, 1);
 
@@ -313,6 +314,7 @@ class MyBird extends CGFobject {
 
         if (!this.hasBranch)
             return;
+        console.log("Displayed branch")
         this.branch.display();
         
     }

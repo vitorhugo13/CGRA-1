@@ -53,6 +53,7 @@ class MyLeaf extends CGFobject {
     }
     
     display() {
+		this.scene.leaf.apply();
         super.display();
     }
 }

@@ -24,9 +24,10 @@ class MyNest extends CGFobject{
     }
 
     addBranch(branch) {
-        //branch.setPosition();
-        //branch.setOrientation();
+        branch.setPosition(this.x, this.y + 1.2, this.z);
+        branch.setOrientation(this.branches.length * (40 * Math.PI / 180));
         this.branches.push(branch);
+        
     }
 
     display(){
@@ -41,7 +42,6 @@ class MyNest extends CGFobject{
             this.straw.display();
             this.scene.popMatrix();
         }
-
         this.scene.popMatrix();
 
         for (var i = 0; i < this.branches.length; i++) {

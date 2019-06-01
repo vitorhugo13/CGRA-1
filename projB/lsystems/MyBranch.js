@@ -64,6 +64,7 @@ class MyBranch extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.scale(0.25, 2.5, 0.1);
+        this.scene.stickSide.apply();
         super.display();
         this.scene.popMatrix();
     }
