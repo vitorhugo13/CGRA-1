@@ -43,11 +43,17 @@ class MyBird extends CGFobject {
     }
 
     descend() {
+        if (this.state != this.BirdState.NORMAL)
+            return;
+
         this.state = this.BirdState.DESCENDING;
         this.yDecrement = - (this.y - 0.5) * this.scene.updatePeriod / 1000;
     }
 
     ascend() {
+        if (this.state != this.BirdState.DESCENDING)
+            return;
+
         this.state = this.BirdState.ASCENDING;
         this.yIncrement = (this.y0 - this.y) * this.scene.updatePeriod / 1000;
     }
