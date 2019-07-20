@@ -40,5 +40,5 @@ All code developed for the TP classes of the CGRA course
 * **Specification** : [Portuguese](specifications/tp06.pdf)
 
 #### Project B
-* **Specification** : [Portuguese](specification/projB.pdf)
-* **Grade** :
+* **Specification** : [Portuguese](specifications/projB.pdf)
+* **Grade** : 18.1
